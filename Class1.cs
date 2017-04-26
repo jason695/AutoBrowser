@@ -59,9 +59,8 @@ namespace AutoBrowser
             try
             {
                 proc.Start();
-                string command = @"net use a: /del>NUL";
-                proc.StandardInput.WriteLine(command);
-                command = @"net use a: \\" + remoteHost + " " + passWord + " /user:" + userName + ">NUL";
+                string command;
+                command = @"net use \\" + remoteHost + " " + passWord + " /user:" + userName + ">NUL";
                 proc.StandardInput.WriteLine(command);
                 command = "exit";
                 proc.StandardInput.WriteLine(command);
@@ -73,8 +72,10 @@ namespace AutoBrowser
 
                 string errormsg = proc.StandardError.ReadToEnd();
                 if (errormsg != "")
+                { 
                     Flag = false;
-
+                    wrLog(errormsg.ToString(), "Connect");
+                }
                 proc.StandardError.Close();
             }
             catch (Exception ex)
@@ -106,7 +107,7 @@ namespace AutoBrowser
             try
             {
                 proc.Start();
-                string command = @"net  use  \\" + remoteHost + " /delete";
+                string command = @"net use \\" + remoteHost + " /delete";
                 proc.StandardInput.WriteLine(command);
                 command = "exit";
                 proc.StandardInput.WriteLine(command);

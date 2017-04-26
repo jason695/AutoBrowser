@@ -27,8 +27,9 @@ namespace AutoBrowser
         DataTable dt;
 
         string path = ""; //AutoBrowser.Properties.Settings.Default.path1.ToString();
-        //string path = @"\\10.11.34.172\c$\list_p.txt";
         //string path = @"d:\\list.txt"; //測試
+
+        string logDir = @"c:\AutoBrowser_log\";
         
         public Form1()
         {
@@ -46,6 +47,7 @@ namespace AutoBrowser
             //UC1
             //this.userControl1.myClick += new EventHandler(myButtonHandler); 
 
+            load_ini();
             getData_ini();
             getTips();
         }
@@ -130,67 +132,55 @@ namespace AutoBrowser
             }
         }
 
-        //下拉選單_COPY檔案
+        //下拉選單_同步檔案
         public string getData()
         {
-            //if (cs.Connect(@"10.11.34.172", "administrator", "1qaz!QAZ") == true)
-            //{
-            //    if (this.Text.IndexOf("使用") == -1)
-            //    {
-            //        this.Text += "(使用遠端1連線)";
-            //    }
-            //    path = AutoBrowser.Properties.Settings.Default.path1.ToString();         
-            //}
-            //else
-            //{
-            //    if (cs.Connect(@"10.11.22.51", "113720", "113720") == true)    
-            //    {
-            //        if (this.Text.IndexOf("使用") == -1)
-            //        {
-            //            this.Text += "(使用遠端2連線)";
-            //        }                    
-            //        path = AutoBrowser.Properties.Settings.Default.path2.ToString();          
-            //    }
-            //    else
-            //    {
-            //        if (this.Text.IndexOf("使用") == -1)
-            //        {
-            //            this.Text += "(使用本機連線)";
-            //        }                    
-            //        path = AutoBrowser.Properties.Settings.Default.path3.ToString();                    
-            //    };  
-            //};
-
             string vSTR = "";
-
-            if (cs.Connect(@"10.11.34.172", "administrator", "1qaz!QAZ") == true)
+           
+            //1->2 & 1->3
+            if (cs.Connect(@"10.11.34.172\d$", "administrator", "1qaz!QAZ") == true)
             {
-                vSTR  = "(使用遠端1連線)";
-                path = AutoBrowser.Properties.Settings.Default.path1.ToString();
+                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                    , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+
+                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                    , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+
+                vSTR = "(使用遠端1)";
             }
             else
             {
-                if (cs.Connect(@"10.11.22.51", "113720", "113720") == true)
+                //1不通,2->3
+                if (cs.Connect(@"10.11.22.51\c$", "113720", "113720") == true)
                 {
-                    vSTR ="(使用遠端2連線)";
-                    path = AutoBrowser.Properties.Settings.Default.path2.ToString();
+                    File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+                        , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+                    vSTR = "(使用遠端2)";
                 }
-                else
-                {
-                    vSTR= "(使用本機連線)";                    
-                };
-            };
-
-            //COPY檔案到本機
-            if (path != AutoBrowser.Properties.Settings.Default.path3.ToString())
-            {
-                File.Copy(path, AutoBrowser.Properties.Settings.Default.path3.ToString(), true);            
-            }
+                else 
+                { 
+                    vSTR = "(使用本機)"; 
+                }
+            }            
             
             return vSTR;
         }
         
-        //下拉選單_啟動用
+
+        //建立程式執行目錄
+        public void load_ini()
+        {
+            path = logDir;
+            String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMdd") + ".jpg";
+
+            //建立目錄
+            if (!Directory.Exists(path))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(path);
+            }
+        }
+        
+        //下拉選單_啟動用,抓本機
         public void getData_ini()
         {
             path = AutoBrowser.Properties.Settings.Default.path3.ToString();
@@ -330,15 +320,9 @@ namespace AutoBrowser
         public void prScrn(){
             try
             {
-                String path = @"c:\AutoBrowser_log\";
+                path = logDir;
                 String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMdd") + ".jpg";
 
-                //建立目錄
-                if (!Directory.Exists(path))
-                {
-                    DirectoryInfo di = Directory.CreateDirectory(path);
-                }
-  
                 Bitmap myImage = new Bitmap(1920, 1080);
                 Graphics g = Graphics.FromImage(myImage);
                 g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(1920, 1080));
@@ -499,14 +483,13 @@ namespace AutoBrowser
 
         private void btnSYNC_Click(object sender, EventArgs e)
         {
-
             string vStr = getData();
-            
-            if ( vStr != "")
+
+            if (vStr != "")
             { 
-                MessageBox.Show(vStr + "同步資料到本機完成");
+                MessageBox.Show(vStr + "同步資料完成");
             }
         }
-      
+
     }
 }
