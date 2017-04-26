@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AutoBrowser.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="USR" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PWD" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAL" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TIME" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="path2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\10.11.22.51\d$\113720\list_p.txt</Value>
+    </Setting>
+    <Setting Name="path1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\10.11.34.172\c$\list_p.txt</Value>
+    </Setting>
+    <Setting Name="path3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\\AutoBrowser_log\\list_p.txt</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
