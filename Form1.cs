@@ -142,8 +142,11 @@ namespace AutoBrowser
                 //1->2 & 1->3
                 if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
                 {
-                    File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                        , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+                    if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
+                    {
+                        File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                            , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+                    }
 
                     File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
                         , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
