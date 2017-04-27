@@ -26,7 +26,7 @@ namespace AutoBrowser
         Class1 cs = new Class1();
         DataTable dt;
 
-        string path = ""; //AutoBrowser.Properties.Settings.Default.path1.ToString();
+        string path = ""; 
         //string path = @"d:\\list.txt"; //測試
 
         string logDir = @"c:\AutoBrowser_log\";
@@ -136,32 +136,40 @@ namespace AutoBrowser
         public string getData()
         {
             string vSTR = "";
-           
-            //1->2 & 1->3
-            if (cs.Connect(@"10.11.34.172\d$", "administrator", "1qaz!QAZ") == true)
-            {
-                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                    , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
 
-                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                    , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-
-                vSTR = "(使用遠端1)";
-            }
-            else
+            try
             {
-                //1不通,2->3
-                if (cs.Connect(@"10.11.22.51\c$", "113720", "113720") == true)
+                //1->2 & 1->3
+                if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
                 {
-                    File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+                    File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                        , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+
+                    File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
                         , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-                    vSTR = "(使用遠端2)";
+
+                    vSTR = "(使用遠端1)";
                 }
-                else 
-                { 
-                    vSTR = "(使用本機)"; 
-                }
-            }            
+                else
+                {
+                    //1不通,2->3
+                    if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
+                    {
+                        File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+                            , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+                        vSTR = "(使用遠端2)";
+                    }
+                    else 
+                    { 
+                        vSTR = "(使用本機)"; 
+                    }
+                }            
+            }
+            catch (Exception ex)
+            {
+                cs.wrLog(ex.ToString(), "getData");
+                //throw;
+            }          
             
             return vSTR;
         }
@@ -483,12 +491,34 @@ namespace AutoBrowser
 
         private void btnSYNC_Click(object sender, EventArgs e)
         {
-            string vStr = getData();
+            string str="";
 
-            if (vStr != "")
-            { 
-                MessageBox.Show(vStr + "同步資料完成");
+            try
+            {
+                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                 , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+
+                str += "同步遠端1->2完成" + Environment.NewLine;
+
+                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                    , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+
+                str += "同步遠端1->本機完成" + Environment.NewLine;              
             }
+            catch (Exception ex)
+            {
+                File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+                  , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+
+                str += "同步遠端2->本機完成";
+
+                cs.wrLog(ex.ToString(), txtID.Text);
+                //throw;
+            }
+            finally {
+                MessageBox.Show(str);
+            }
+         
         }
 
     }

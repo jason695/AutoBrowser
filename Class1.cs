@@ -74,7 +74,8 @@ namespace AutoBrowser
                 if (errormsg != "")
                 { 
                     Flag = false;
-                    wrLog(errormsg.ToString(), "Connect");
+                    DisConnect(remoteHost);
+                    wrLog("[ERR:"+errormsg.ToString()+"]", "Connect");
                 }
                 proc.StandardError.Close();
             }
