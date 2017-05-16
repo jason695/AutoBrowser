@@ -28,8 +28,7 @@ namespace AutoBrowser
 
         string path = ""; 
         //string path = @"d:\\list.txt"; //測試
-
-        string logDir = @"c:\AutoBrowser_log\";
+        string logDir = @"c:\AutoBrowser_log\"; //截圖+LOG用
         
         public Form1()
         {
@@ -52,15 +51,14 @@ namespace AutoBrowser
             getTips();
         }
         
+        //欄位CHECK
         public Boolean dataCheck()
         {
             if (txtID.Text == "" || txtPWD2.Text == "")
             {
                 MessageBox.Show("帳密請勿空白!!");
                 return false;
-            }
-            else
-            {
+            }else{
                 return true;
             }     
         }
@@ -132,74 +130,72 @@ namespace AutoBrowser
             }
         }
 
-        //下拉選單_同步檔案
-        public string getData()
-        {
-            string vSTR = "";
+        //下拉選單_同步檔案 @Jason_20170516:同步功能暫移除
+        //public string getData()
+        //{
+        //    string vSTR = "";
                        
-            //1->2 & 1->3
-            if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
-            {
-                if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
-                {
-                    try
-                    {
-                        File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                            , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
-                    }
-                    catch (Exception ex)
-                    {
-                        cs.wrLog(ex.ToString(), "getData");
-                        //throw;
-                    }
+        //    //1->2 & 1->3
+        //    if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
+        //    {
+        //        if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
+        //        {
+        //            try
+        //            {
+        //                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+        //                    , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                cs.wrLog(ex.ToString(), "getData");
+        //                //throw;
+        //            }
 
-                    try
-                    {
-                        File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                            , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-                    }
-                    catch (Exception ex)
-                    {
-                        cs.wrLog(ex.ToString(), "getData");
-                        //throw;
-                    }
-                }
+        //            try
+        //            {
+        //                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+        //                    , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                cs.wrLog(ex.ToString(), "getData");
+        //                //throw;
+        //            }
+        //        }
                     
-                vSTR = "(使用遠端1)";
-            }
-            else
-            {
-                //1不通,2->3
-                if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
-                {
-                    try
-                    {
-                        File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
-                        , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-                        vSTR = "(使用遠端2)";
-                    }
-                    catch (Exception ex)
-                    {
-                        cs.wrLog(ex.ToString(), "getData");
-                        //throw;
-                    }     
-                }
-            }  
+        //        vSTR = "(使用遠端1)";
+        //    }
+        //    else
+        //    {
+        //        //1不通,2->3
+        //        if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
+        //        {
+        //            try
+        //            {
+        //                File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+        //                , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+        //                vSTR = "(使用遠端2)";
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                cs.wrLog(ex.ToString(), "getData");
+        //                //throw;
+        //            }     
+        //        }
+        //    }  
             
-            if (vSTR == "")
-            { 
-                vSTR = "(使用本機)"; 
-            }
+        //    if (vSTR == "")
+        //    { 
+        //        vSTR = "(使用本機)"; 
+        //    }
             
-            return vSTR;
-        }
-        
+        //    return vSTR;
+        //}        
 
         //建立程式執行目錄
         public void load_ini()
         {
             path = logDir;
-            String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMdd") + ".jpg";
 
             //建立目錄
             if (!Directory.Exists(path))
@@ -238,15 +234,6 @@ namespace AutoBrowser
             tips.AutoPopDelay = 3000;
             //tips.SetToolTip(this.txtPWD2, cs.getDES(txtPWD2.Text.ToString()));           
         }
-
-        //UC1
-        //public void myButtonHandler(object sender, EventArgs e)
-        //{
-        //    UserControl1 uc1 = sender as UserControl1;            
-        //    txtID.Text = uc1.getID().ToString();
-        //    txtPWD2.Text = uc1.getPWD().ToString();
-        //    txtMAIL.Text = uc1.getMail().ToString();
-        //}        
 
         //寄MAIL
         public void sendMail(){
@@ -349,7 +336,7 @@ namespace AutoBrowser
             try
             {
                 path = logDir;
-                String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMdd") + ".jpg";
+                String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMdd") + "_" + txtID.Text.ToString() + ".jpg";
 
                 Bitmap myImage = new Bitmap(1920, 1080);
                 Graphics g = Graphics.FromImage(myImage);
@@ -363,7 +350,7 @@ namespace AutoBrowser
             }
         }
 
-        #region BUTTON
+        #region ---BUTTON---
         private void btnCARD_Click(object sender, EventArgs e)
         {
             card();
@@ -395,10 +382,14 @@ namespace AutoBrowser
 
         private void btnLIST_Click(object sender, EventArgs e)
         {
-            getData();            
-            Form2 frm = new Form2();
-            frm.ShowDialog(this);
-            frm.Dispose();            
+            //@Jason_20170516:同步功能暫移
+            //getData(); 
+            if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
+            { 
+                Form2 frm = new Form2();
+                frm.ShowDialog(this);
+                frm.Dispose();
+            }
         }
 
         private void btnSHUTDOWN2_Click(object sender, EventArgs e)
@@ -484,34 +475,23 @@ namespace AutoBrowser
 
         private void comboBox1_Click(object sender, EventArgs e)
         {
-            if (this.Text.IndexOf("使用") == -1)
-            {             
-                //觸發非同步(COPY遠端檔案到本機)
-                IAsyncResult asyncResult = BeginCalculate();
-                string result = EndCalculate(asyncResult);
-                this.Text += result;
-                getData_ini();
-            }            
+            //@Jason_20170516:同步功能暫移除
+            //if (this.Text.IndexOf("使用") == -1)
+            //{             
+            //    //觸發非同步(COPY遠端檔案到本機)
+            //    IAsyncResult asyncResult = BeginCalculate();
+            //    string result = EndCalculate(asyncResult);
+            //    this.Text += result;
+            //    getData_ini();
+            //}
+            
+            getData_ini();
         }
 
-        #region 非同步
-        public Func<string> m_calculateDelegate;
-
-        public IAsyncResult BeginCalculate()
-        {
-            this.m_calculateDelegate = getData;
-            return this.m_calculateDelegate.BeginInvoke(null,null);
-        }
-
-        public string EndCalculate(IAsyncResult asyncResult)
-        {
-            return this.m_calculateDelegate.EndInvoke(asyncResult);
-        }
-        #endregion
-
+        //人工同步
         private void btnSYNC_Click(object sender, EventArgs e)
         {
-            string str="";
+            string str = "";
 
             try
             {
@@ -523,7 +503,7 @@ namespace AutoBrowser
                 File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
                     , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
 
-                str += "同步遠端1->本機完成" + Environment.NewLine;              
+                str += "同步遠端1->本機完成" + Environment.NewLine;
             }
             catch (Exception ex)
             {
@@ -536,11 +516,28 @@ namespace AutoBrowser
                 cs.wrLog(ex.ToString(), txtID.Text);
                 //throw;
             }
-            finally {
+            finally
+            {
                 MessageBox.Show(str);
             }
-         
+
         }
+
+        #region ---非同步---
+        //@Jason_20170516:同步功能暫移除
+        //public Func<string> m_calculateDelegate;
+
+        //public IAsyncResult BeginCalculate()
+        //{
+        //    this.m_calculateDelegate = getData;
+        //    return this.m_calculateDelegate.BeginInvoke(null, null);
+        //}
+
+        //public string EndCalculate(IAsyncResult asyncResult)
+        //{
+        //    return this.m_calculateDelegate.EndInvoke(asyncResult);
+        //}
+        #endregion
 
     }
 }
