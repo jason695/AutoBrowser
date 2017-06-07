@@ -495,24 +495,40 @@ namespace AutoBrowser
 
             try
             {
-                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                 , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
+                if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)  //遠端1
+                {
+                    if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true) //遠端2
+                    {
+                        File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                                 , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
 
-                str += "同步遠端1->2完成" + Environment.NewLine;
+                        str += "同步遠端1->2完成" + Environment.NewLine;
+                    }
+                    else {
+                        str += "遠端2連線失敗" + Environment.NewLine;                    
+                    }
+                   
+                    File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+                            , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
 
-                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                    , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
+                    str += "同步遠端1->本機完成" + Environment.NewLine;
+                }
+                else if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true) //遠端2
+                {
+                    File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+                            , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
 
-                str += "同步遠端1->本機完成" + Environment.NewLine;
+                    str += "遠端1連線失敗" + Environment.NewLine;
+                    str += "同步遠端2->本機完成";
+                }
+                else
+                {
+                    str += "遠端1連線失敗" + Environment.NewLine;
+                    str += "遠端2連線失敗" + Environment.NewLine;
+                }
             }
             catch (Exception ex)
             {
-                File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
-                  , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-
-                str += "遠端1連線失敗" + Environment.NewLine;
-                str += "同步遠端2->本機完成";
-
                 cs.wrLog(ex.ToString(), txtID.Text);
                 //throw;
             }
@@ -520,7 +536,6 @@ namespace AutoBrowser
             {
                 MessageBox.Show(str);
             }
-
         }
 
         #region ---非同步---
