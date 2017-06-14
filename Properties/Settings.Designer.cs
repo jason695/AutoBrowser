@@ -12,7 +12,7 @@ namespace AutoBrowser.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -71,39 +71,96 @@ namespace AutoBrowser.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.11.22.51\\d$\\113720\\list_p.txt")]
-        public string path2 {
-            get {
-                return ((string)(this["path2"]));
-            }
-            set {
-                this["path2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.11.34.172\\c$\\list_p.txt")]
         public string path1 {
             get {
                 return ((string)(this["path1"]));
             }
-            set {
-                this["path1"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.11.22.51\\d$\\113720\\list_p.txt")]
+        public string path2 {
+            get {
+                return ((string)(this["path2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\AutoBrowser_log\\\\list_p.txt")]
+        public string path_local {
+            get {
+                return ((string)(this["path_local"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("administrator")]
+        public string id1 {
+            get {
+                return ((string)(this["id1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1qaz!QAZ")]
+        public string pw1 {
+            get {
+                return ((string)(this["pw1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("113720")]
+        public string id2 {
+            get {
+                return ((string)(this["id2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("113720")]
+        public string pw2 {
+            get {
+                return ((string)(this["pw2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.11.34.172\\c$")]
+        public string con1 {
+            get {
+                return ((string)(this["con1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.11.22.51\\d$")]
+        public string con2 {
+            get {
+                return ((string)(this["con2"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\AutoBrowser_log\\\\list_p.txt")]
-        public string path3 {
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\AutoBrowser_log\\")]
+        public string logDir {
             get {
-                return ((string)(this["path3"]));
+                return ((string)(this["logDir"]));
             }
             set {
-                this["path3"] = value;
+                this["logDir"] = value;
             }
         }
     }

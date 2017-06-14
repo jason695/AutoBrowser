@@ -16,7 +16,7 @@ namespace AutoBrowser
         Class1 cs = new Class1();
         //Form1 frm1 = new Form1();
         DataTable dt;
-        string path = AutoBrowser.Properties.Settings.Default.path1.ToString();
+        string path = AutoBrowser.Properties.Settings.Default.path_local.ToString();
         int curRow; //修改哪筆資料
                 
         public Form2()
@@ -73,8 +73,8 @@ namespace AutoBrowser
             cs.DtToCsv(dt, path);
 
             //COPY TXT
-            File.Copy(path, AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
-            File.Copy(path, AutoBrowser.Properties.Settings.Default.path3.ToString(), true);            
+            File.Copy(path, AutoBrowser.Properties.Settings.Default.path1.ToString(), true);
+            File.Copy(path, AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);            
         }
 
         private void txtID_TextChanged(object sender, EventArgs e)

@@ -14,14 +14,35 @@
     <Setting Name="TIME" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="path2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\\10.11.22.51\d$\113720\list_p.txt</Value>
-    </Setting>
-    <Setting Name="path1" Type="System.String" Scope="User">
+    <Setting Name="path1" Type="System.String" Scope="Application">
       <Value Profile="(Default)">\\10.11.34.172\c$\list_p.txt</Value>
     </Setting>
-    <Setting Name="path3" Type="System.String" Scope="User">
+    <Setting Name="path2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\10.11.22.51\d$\113720\list_p.txt</Value>
+    </Setting>
+    <Setting Name="path_local" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\\AutoBrowser_log\\list_p.txt</Value>
+    </Setting>
+    <Setting Name="id1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">administrator</Value>
+    </Setting>
+    <Setting Name="pw1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1qaz!QAZ</Value>
+    </Setting>
+    <Setting Name="id2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">113720</Value>
+    </Setting>
+    <Setting Name="pw2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">113720</Value>
+    </Setting>
+    <Setting Name="con1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10.11.34.172\c$</Value>
+    </Setting>
+    <Setting Name="con2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10.11.22.51\d$</Value>
+    </Setting>
+    <Setting Name="logDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\AutoBrowser_log\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

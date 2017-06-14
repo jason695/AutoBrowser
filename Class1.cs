@@ -6,6 +6,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Data;
+using System.Net;
 
 namespace AutoBrowser
 {
@@ -14,7 +15,7 @@ namespace AutoBrowser
         #region 加解密
         string key = "abcdefgh";
         string iv = "12345678";
-        
+
         //加密
         public string setDES(string original)
         {
@@ -72,10 +73,10 @@ namespace AutoBrowser
 
                 string errormsg = proc.StandardError.ReadToEnd();
                 if (errormsg != "")
-                { 
+                {
                     Flag = false;
                     DisConnect(remoteHost);
-                    wrLog("[ERR:"+errormsg.ToString()+"]", "Connect");
+                    wrLog("[ERR:" + errormsg.ToString() + "]", "Connect");
                 }
                 proc.StandardError.Close();
             }
@@ -145,9 +146,9 @@ namespace AutoBrowser
         {
             DataTable dt = new DataTable();
             DataSet ds = new DataSet();
-            
+
             try
-            {   
+            {
                 StreamReader s = new StreamReader(FilePath, System.Text.Encoding.Default);
                 //string ss = s.ReadLine();//skip the first line
                 string[] columns = s.ReadLine().Split(delimiter.ToCharArray());
@@ -192,17 +193,17 @@ namespace AutoBrowser
                 dt = ds.Tables[0];
 
             }
-             catch (Exception ex)
-             {
-                 wrLog(ex.ToString(), "");
-                 //throw;
-             }
-             //finally
-             //{                
-             //}
+            catch (Exception ex)
+            {
+                wrLog(ex.ToString(), "");
+                //throw;
+            }
+            //finally
+            //{                
+            //}
 
             return dt;
-           
+
         }
 
         //DT TO CSV
@@ -256,13 +257,13 @@ namespace AutoBrowser
                 wr.Write(data);
                 throw e;
             }
-            finally 
+            finally
             {
                 wr.Dispose();
                 wr.Close();
             }
         }
-        
+
         //解密讀檔 file to string
         public string rdTXT(string FilePath)
         {
@@ -288,7 +289,7 @@ namespace AutoBrowser
         public void wrDES(string FilePath_S, string FilePath_T)
         {
             string data = "";
-            StreamWriter wr = new StreamWriter(FilePath_T, false, System.Text.Encoding.Default);                
+            StreamWriter wr = new StreamWriter(FilePath_T, false, System.Text.Encoding.Default);
 
             try
             {
@@ -327,12 +328,12 @@ namespace AutoBrowser
                 wr.Close();
             }
         }
-        #endregion        
+        #endregion
 
         //版本
         public string getVer()
         {
-            string str="";
+            string str = "";
             try
             {
                 //str += System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(); //發行
@@ -346,7 +347,7 @@ namespace AutoBrowser
         }
 
         //寫LOG
-        public void wrLog(string msg,string txtID)
+        public void wrLog(string msg, string txtID)
         {
             string fil = @"C:\AutoBrowser_log\AutoBrowser_log.txt";
             string dir = fil.Substring(0, fil.LastIndexOf(@"\"));
@@ -380,6 +381,29 @@ namespace AutoBrowser
                 throw ex;
             }
         }
-    }
 
+        //讀取本機IP
+        public string getIP()
+        {
+            string str = "";
+
+            // 取得本機名稱
+            string strHostName = Dns.GetHostName();
+
+            // 取得本機的IpHostEntry類別實體，MSDN建議新的用法
+            IPHostEntry iphostentry = Dns.GetHostEntry(strHostName);
+
+            // 取得所有 IP 位址
+            foreach (IPAddress ipaddress in iphostentry.AddressList)
+            {
+                // 只取得IP V4的Address
+                if (ipaddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    str = ipaddress.ToString();
+                }
+            }
+
+            return str;
+        }
+    }
 }

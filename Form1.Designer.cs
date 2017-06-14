@@ -48,6 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSYNC = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -236,17 +237,28 @@
             // 
             this.btnSYNC.Location = new System.Drawing.Point(21, 214);
             this.btnSYNC.Name = "btnSYNC";
-            this.btnSYNC.Size = new System.Drawing.Size(161, 33);
+            this.btnSYNC.Size = new System.Drawing.Size(161, 28);
             this.btnSYNC.TabIndex = 100;
-            this.btnSYNC.Text = "名單同步至本機";
+            this.btnSYNC.Text = "名單同步";
             this.btnSYNC.UseVisualStyleBackColor = true;
             this.btnSYNC.Click += new System.EventHandler(this.btnSYNC_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(214, 214);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(161, 28);
+            this.button1.TabIndex = 101;
+            this.button1.Text = "名單寫入";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 281);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSYNC);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -295,6 +307,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSYNC;
+        private System.Windows.Forms.Button button1;
 
     }
 }

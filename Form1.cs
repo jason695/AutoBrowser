@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +16,9 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Runtime.InteropServices;
 using System.Reflection;
 //using System.Diagnostics;     // to use Missing.Value
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;  
 
 namespace AutoBrowser
 {
@@ -26,9 +28,8 @@ namespace AutoBrowser
         Class1 cs = new Class1();
         DataTable dt;
 
-        string path = ""; 
-        //string path = @"d:\\list.txt"; //測試
-        string logDir = @"c:\AutoBrowser_log\"; //截圖+LOG用
+        string path = "";  //@"d:\\list.txt"; //測試        
+        string logDir = AutoBrowser.Properties.Settings.Default.logDir.ToString(); //截圖+LOG用
         
         public Form1()
         {
@@ -130,6 +131,7 @@ namespace AutoBrowser
             }
         }
 
+        #region ---非同步---
         //下拉選單_同步檔案 @Jason_20170516:同步功能暫移除
         //public string getData()
         //{
@@ -191,7 +193,22 @@ namespace AutoBrowser
             
         //    return vSTR;
         //}        
+        
+        //@Jason_20170516:同步功能暫移除
+        //public Func<string> m_calculateDelegate;
 
+        //public IAsyncResult BeginCalculate()
+        //{
+        //    this.m_calculateDelegate = getData;
+        //    return this.m_calculateDelegate.BeginInvoke(null, null);
+        //}
+
+        //public string EndCalculate(IAsyncResult asyncResult)
+        //{
+        //    return this.m_calculateDelegate.EndInvoke(asyncResult);
+        //}
+        #endregion
+        
         //建立程式執行目錄
         public void load_ini()
         {
@@ -207,7 +224,7 @@ namespace AutoBrowser
         //下拉選單_啟動用,抓本機
         public void getData_ini()
         {
-            path = AutoBrowser.Properties.Settings.Default.path3.ToString();
+            path = AutoBrowser.Properties.Settings.Default.path_local.ToString();
 
             if (File.Exists(path) == true)
             { 
@@ -384,12 +401,12 @@ namespace AutoBrowser
         {
             //@Jason_20170516:同步功能暫移
             //getData(); 
-            if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
-            { 
+            //if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
+            //{ 
                 Form2 frm = new Form2();
                 frm.ShowDialog(this);
                 frm.Dispose();
-            }
+            //}
         }
 
         private void btnSHUTDOWN2_Click(object sender, EventArgs e)
@@ -489,70 +506,96 @@ namespace AutoBrowser
         }
 
         //人工同步
+        //private void btnSYNC_Click(object sender, EventArgs e)
+        //{
+        //    string str = "";
+
+        //    try
+        //    {
+        //        if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)  //遠端1
+        //        {
+        //            if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true) //遠端2
+        //            {
+        //                File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+        //                         , AutoBrowser.Properties.Settings.Default.path1.ToString(), true);
+
+        //                str += "同步遠端1->2完成" + Environment.NewLine;
+        //            }
+        //            else {
+        //                str += "遠端2連線失敗" + Environment.NewLine;                    
+        //            }
+                   
+        //            File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
+        //                    , AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);
+
+        //            str += "同步遠端1->本機完成" + Environment.NewLine;
+        //        }
+        //        else if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true) //遠端2
+        //        {
+        //            File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
+        //                    , AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);
+
+        //            str += "遠端1連線失敗" + Environment.NewLine;
+        //            str += "同步遠端2->本機完成";
+        //        }
+        //        else
+        //        {
+        //            str += "遠端1連線失敗" + Environment.NewLine;
+        //            str += "遠端2連線失敗" + Environment.NewLine;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        cs.wrLog(ex.ToString(), txtID.Text);
+        //        //throw;
+        //    }
+        //    finally
+        //    {
+        //        MessageBox.Show(str);
+        //    }
+        //}
+        public class MongoProduct
+        {
+            public ObjectId _id { get; set; }
+            public object txt { get; set; }
+            public string ip { get; set; }
+            public string dtime { get; set; }
+        }
+        
         private void btnSYNC_Click(object sender, EventArgs e)
         {
-            string str = "";
-
-            try
-            {
-                if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)  //遠端1
-                {
-                    if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true) //遠端2
-                    {
-                        File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                                 , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
-
-                        str += "同步遠端1->2完成" + Environment.NewLine;
-                    }
-                    else {
-                        str += "遠端2連線失敗" + Environment.NewLine;                    
-                    }
-                   
-                    File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-                            , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-
-                    str += "同步遠端1->本機完成" + Environment.NewLine;
-                }
-                else if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true) //遠端2
-                {
-                    File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
-                            , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-
-                    str += "遠端1連線失敗" + Environment.NewLine;
-                    str += "同步遠端2->本機完成";
-                }
-                else
-                {
-                    str += "遠端1連線失敗" + Environment.NewLine;
-                    str += "遠端2連線失敗" + Environment.NewLine;
-                }
-            }
-            catch (Exception ex)
-            {
-                cs.wrLog(ex.ToString(), txtID.Text);
-                //throw;
-            }
-            finally
-            {
-                MessageBox.Show(str);
-            }
+            //ref:http://kenneth2011.pixnet.net/blog/post/112097794
+            //連結DB
+            MongoDatabase myDB;
+            List<MongoProduct> Products = new List<MongoProduct>();
+            MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+            MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+            myDB = server.GetDatabase("test"); // 取得 MongoDatabase 物件
+            
+            //讀
+            MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+            var _product = _Products.FindOne();
+                            
         }
 
-        #region ---非同步---
-        //@Jason_20170516:同步功能暫移除
-        //public Func<string> m_calculateDelegate;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //連結DB
+            MongoDatabase myDB;
+            List<MongoProduct> Products = new List<MongoProduct>();
+            MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+            MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+            myDB = server.GetDatabase("test"); // 取得 MongoDatabase 物件
+            
+            //寫
+            MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
+            var newProduct = new MongoProduct();
+            newProduct.txt = "";
+            newProduct.ip = cs.getIP().ToString();
+            newProduct.dtime = DateTime.Now.ToString("yyyyMMddHHmmss");
 
-        //public IAsyncResult BeginCalculate()
-        //{
-        //    this.m_calculateDelegate = getData;
-        //    return this.m_calculateDelegate.BeginInvoke(null, null);
-        //}
-
-        //public string EndCalculate(IAsyncResult asyncResult)
-        //{
-        //    return this.m_calculateDelegate.EndInvoke(asyncResult);
-        //}
-        #endregion
+            _Products.Insert(newProduct);       
+        }      
 
     }
 }
