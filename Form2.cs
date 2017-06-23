@@ -76,6 +76,7 @@ namespace AutoBrowser
             //File.Copy(path, AutoBrowser.Properties.Settings.Default.path1.ToString(), true);
             //File.Copy(path, AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);            
 
+            //上送DB
             cs.mongo_upload();
         }
 
@@ -127,6 +128,10 @@ namespace AutoBrowser
             txtID.Text = "";
             txtMAIL.Text = "";
             txtNAME.Text = "";
+
+
+            //上送DB
+            cs.mongo_upload();
         }
 
         private void btnDEL_Click(object sender, EventArgs e)
@@ -135,6 +140,9 @@ namespace AutoBrowser
             dataGridView1.Rows.Remove(this.dataGridView1.Rows[curRow]); 
             dt.AcceptChanges();
             cs.DtToCsv(dt, path);
+
+            //上送DB
+            cs.mongo_upload();
         }
         
         private void btnCLS_Click(object sender, EventArgs e)
