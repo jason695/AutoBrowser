@@ -73,8 +73,10 @@ namespace AutoBrowser
             cs.DtToCsv(dt, path);
 
             //COPY TXT
-            File.Copy(path, AutoBrowser.Properties.Settings.Default.path1.ToString(), true);
-            File.Copy(path, AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);            
+            //File.Copy(path, AutoBrowser.Properties.Settings.Default.path1.ToString(), true);
+            //File.Copy(path, AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);            
+
+            cs.mongo_upload();
         }
 
         private void txtID_TextChanged(object sender, EventArgs e)
@@ -147,6 +149,8 @@ namespace AutoBrowser
             txtMAIL.Text = "";
             txtNAME.Text = "";
         }
+
+       
 
     }
 }

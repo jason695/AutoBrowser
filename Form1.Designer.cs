@@ -48,7 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSYNC = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +62,7 @@
             // 
             this.btnCARD.Location = new System.Drawing.Point(214, 140);
             this.btnCARD.Name = "btnCARD";
-            this.btnCARD.Size = new System.Drawing.Size(161, 28);
+            this.btnCARD.Size = new System.Drawing.Size(161, 40);
             this.btnCARD.TabIndex = 7;
             this.btnCARD.Text = "打卡";
             this.btnCARD.UseVisualStyleBackColor = true;
@@ -100,9 +99,9 @@
             // 
             this.btnSET.Location = new System.Drawing.Point(21, 140);
             this.btnSET.Name = "btnSET";
-            this.btnSET.Size = new System.Drawing.Size(161, 28);
+            this.btnSET.Size = new System.Drawing.Size(161, 40);
             this.btnSET.TabIndex = 5;
-            this.btnSET.Text = "設定個人預設值";
+            this.btnSET.Text = "設定預設值";
             this.btnSET.UseVisualStyleBackColor = true;
             this.btnSET.Click += new System.EventHandler(this.btnSET_Click);
             // 
@@ -125,10 +124,10 @@
             // btnSHUTDOWN
             // 
             this.btnSHUTDOWN.BackColor = System.Drawing.Color.Red;
-            this.btnSHUTDOWN.Location = new System.Drawing.Point(214, 177);
+            this.btnSHUTDOWN.Location = new System.Drawing.Point(213, 193);
             this.btnSHUTDOWN.Margin = new System.Windows.Forms.Padding(2);
             this.btnSHUTDOWN.Name = "btnSHUTDOWN";
-            this.btnSHUTDOWN.Size = new System.Drawing.Size(161, 28);
+            this.btnSHUTDOWN.Size = new System.Drawing.Size(161, 40);
             this.btnSHUTDOWN.TabIndex = 8;
             this.btnSHUTDOWN.Text = "打卡後關機";
             this.btnSHUTDOWN.UseVisualStyleBackColor = false;
@@ -148,10 +147,10 @@
             // 
             // btnLIST
             // 
-            this.btnLIST.Location = new System.Drawing.Point(21, 177);
+            this.btnLIST.Location = new System.Drawing.Point(20, 193);
             this.btnLIST.Margin = new System.Windows.Forms.Padding(2);
             this.btnLIST.Name = "btnLIST";
-            this.btnLIST.Size = new System.Drawing.Size(161, 28);
+            this.btnLIST.Size = new System.Drawing.Size(77, 40);
             this.btnLIST.TabIndex = 6;
             this.btnLIST.Text = "名單維護";
             this.btnLIST.UseVisualStyleBackColor = true;
@@ -183,7 +182,7 @@
             this.btnSHUTDOWN2.Location = new System.Drawing.Point(4, 54);
             this.btnSHUTDOWN2.Margin = new System.Windows.Forms.Padding(2);
             this.btnSHUTDOWN2.Name = "btnSHUTDOWN2";
-            this.btnSHUTDOWN2.Size = new System.Drawing.Size(161, 28);
+            this.btnSHUTDOWN2.Size = new System.Drawing.Size(161, 40);
             this.btnSHUTDOWN2.TabIndex = 10;
             this.btnSHUTDOWN2.Text = "排程打卡+關機";
             this.btnSHUTDOWN2.UseVisualStyleBackColor = false;
@@ -235,30 +234,19 @@
             // 
             // btnSYNC
             // 
-            this.btnSYNC.Location = new System.Drawing.Point(21, 214);
+            this.btnSYNC.Location = new System.Drawing.Point(106, 193);
             this.btnSYNC.Name = "btnSYNC";
-            this.btnSYNC.Size = new System.Drawing.Size(161, 28);
+            this.btnSYNC.Size = new System.Drawing.Size(77, 40);
             this.btnSYNC.TabIndex = 100;
             this.btnSYNC.Text = "名單同步";
             this.btnSYNC.UseVisualStyleBackColor = true;
             this.btnSYNC.Click += new System.EventHandler(this.btnSYNC_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(214, 214);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 28);
-            this.button1.TabIndex = 101;
-            this.button1.Text = "名單寫入";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 281);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSYNC);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -307,7 +295,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSYNC;
-        private System.Windows.Forms.Button button1;
 
     }
 }

@@ -7,6 +7,11 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Data;
 using System.Net;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using System.Collections;
+
 
 namespace AutoBrowser
 {
@@ -330,6 +335,108 @@ namespace AutoBrowser
         }
         #endregion
 
+        #region MONGO
+        //ref:http://kenneth2011.pixnet.net/blog/post/112097794
+
+        public class MongoProduct
+        {
+            public ObjectId _id { get; set; }
+            public ArrayList txt { get; set; }
+            public string ip { get; set; }
+            public string dtime { get; set; }
+        }
+
+        string path = AutoBrowser.Properties.Settings.Default.path_local.ToString();
+
+        public bool mongo_sync()
+        {
+            bool Flag = true;
+            
+            try
+            {
+                //連結DB
+                MongoDatabase myDB;
+                List<MongoProduct> Products = new List<MongoProduct>();
+                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+                MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
+                MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+                myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
+
+                //讀DB
+                MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+                var _product = _Products.FindOne();
+                
+                //寫檔
+                StreamWriter file = new StreamWriter(path, false, Encoding.Default);
+
+                ArrayList arrText = new ArrayList();
+                arrText = _product.txt;
+                
+                for (int i = 0; i < arrText.Count; i++)
+                {
+                    file.WriteLine(arrText[i].ToString());
+                }
+
+                file.Close();
+            }
+            catch (Exception ex)
+            {
+                Flag = false;
+                wrLog(ex.ToString(), "mongo_sync");
+                throw ex;
+            }
+
+            return Flag;
+        }
+
+
+        public void mongo_upload()
+        {
+            try
+            {
+                //連結DB
+                MongoDatabase myDB;
+                List<MongoProduct> Products = new List<MongoProduct>();
+                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+                MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
+                MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+                myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
+
+                //讀檔
+                StreamReader objReader = new StreamReader(path, Encoding.Default);
+                string sLine = "";
+                ArrayList arrText = new ArrayList();
+
+                do
+                {
+                    sLine = objReader.ReadLine();
+                    if (sLine != null)
+                    {
+                        arrText.Add(sLine);
+                    }
+                } while (sLine != null);
+                objReader.Close();
+
+                //寫DB
+                MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
+                var newProduct = new MongoProduct();
+                newProduct.txt = arrText;
+                newProduct.ip = getIP().ToString();
+                newProduct.dtime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                _Products.Drop();
+                _Products.Insert(newProduct);
+            }
+            catch (Exception ex)
+            {
+                wrLog(ex.ToString(), "mongo_upload");
+                throw ex;
+            }
+            
+            
+        }
+        #endregion
+        
         //版本
         public string getVer()
         {

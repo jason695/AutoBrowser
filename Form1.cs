@@ -16,9 +16,7 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Runtime.InteropServices;
 using System.Reflection;
 //using System.Diagnostics;     // to use Missing.Value
-using MongoDB.Bson;
-using MongoDB.Driver;
-using MongoDB.Driver.Builders;  
+
 
 namespace AutoBrowser
 {
@@ -28,9 +26,9 @@ namespace AutoBrowser
         Class1 cs = new Class1();
         DataTable dt;
 
-        string path = "";  //@"d:\\list.txt"; //測試        
+        string path = "";  
         string logDir = AutoBrowser.Properties.Settings.Default.logDir.ToString(); //截圖+LOG用
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -130,84 +128,6 @@ namespace AutoBrowser
                 System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\shutdown.exe", "-f -s -t 0");
             }
         }
-
-        #region ---非同步---
-        //下拉選單_同步檔案 @Jason_20170516:同步功能暫移除
-        //public string getData()
-        //{
-        //    string vSTR = "";
-                       
-        //    //1->2 & 1->3
-        //    if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
-        //    {
-        //        if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
-        //        {
-        //            try
-        //            {
-        //                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-        //                    , AutoBrowser.Properties.Settings.Default.path2.ToString(), true);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                cs.wrLog(ex.ToString(), "getData");
-        //                //throw;
-        //            }
-
-        //            try
-        //            {
-        //                File.Copy(AutoBrowser.Properties.Settings.Default.path1.ToString()
-        //                    , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                cs.wrLog(ex.ToString(), "getData");
-        //                //throw;
-        //            }
-        //        }
-                    
-        //        vSTR = "(使用遠端1)";
-        //    }
-        //    else
-        //    {
-        //        //1不通,2->3
-        //        if (cs.Connect(@"10.11.22.51\d$", "113720", "113720") == true)
-        //        {
-        //            try
-        //            {
-        //                File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
-        //                , AutoBrowser.Properties.Settings.Default.path3.ToString(), true);
-        //                vSTR = "(使用遠端2)";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                cs.wrLog(ex.ToString(), "getData");
-        //                //throw;
-        //            }     
-        //        }
-        //    }  
-            
-        //    if (vSTR == "")
-        //    { 
-        //        vSTR = "(使用本機)"; 
-        //    }
-            
-        //    return vSTR;
-        //}        
-        
-        //@Jason_20170516:同步功能暫移除
-        //public Func<string> m_calculateDelegate;
-
-        //public IAsyncResult BeginCalculate()
-        //{
-        //    this.m_calculateDelegate = getData;
-        //    return this.m_calculateDelegate.BeginInvoke(null, null);
-        //}
-
-        //public string EndCalculate(IAsyncResult asyncResult)
-        //{
-        //    return this.m_calculateDelegate.EndInvoke(asyncResult);
-        //}
-        #endregion
         
         //建立程式執行目錄
         public void load_ini()
@@ -397,16 +317,12 @@ namespace AutoBrowser
             }
         }
 
+        //名單維護
         private void btnLIST_Click(object sender, EventArgs e)
         {
-            //@Jason_20170516:同步功能暫移
-            //getData(); 
-            //if (cs.Connect(@"10.11.34.172\c$", "administrator", "1qaz!QAZ") == true)
-            //{ 
-                Form2 frm = new Form2();
-                frm.ShowDialog(this);
-                frm.Dispose();
-            //}
+            Form2 frm = new Form2();
+            frm.ShowDialog(this);
+            frm.Dispose();            
         }
 
         private void btnSHUTDOWN2_Click(object sender, EventArgs e)
@@ -426,6 +342,16 @@ namespace AutoBrowser
                 label4.Text = "設定完成!!";
                 timer1.Enabled = true;
             }
+        }
+
+        //同步MONGO的資料下來
+        private void btnSYNC_Click(object sender, EventArgs e)
+        {
+            if (cs.mongo_sync()==true)
+            {
+                MessageBox.Show("SYNC OK!!");            
+            }
+               
         }
         #endregion
         
@@ -492,16 +418,6 @@ namespace AutoBrowser
 
         private void comboBox1_Click(object sender, EventArgs e)
         {
-            //@Jason_20170516:同步功能暫移除
-            //if (this.Text.IndexOf("使用") == -1)
-            //{             
-            //    //觸發非同步(COPY遠端檔案到本機)
-            //    IAsyncResult asyncResult = BeginCalculate();
-            //    string result = EndCalculate(asyncResult);
-            //    this.Text += result;
-            //    getData_ini();
-            //}
-            
             getData_ini();
         }
 
@@ -554,48 +470,6 @@ namespace AutoBrowser
         //        MessageBox.Show(str);
         //    }
         //}
-        public class MongoProduct
-        {
-            public ObjectId _id { get; set; }
-            public object txt { get; set; }
-            public string ip { get; set; }
-            public string dtime { get; set; }
-        }
-        
-        private void btnSYNC_Click(object sender, EventArgs e)
-        {
-            //ref:http://kenneth2011.pixnet.net/blog/post/112097794
-            //連結DB
-            MongoDatabase myDB;
-            List<MongoProduct> Products = new List<MongoProduct>();
-            MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
-            MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
-            myDB = server.GetDatabase("test"); // 取得 MongoDatabase 物件
-            
-            //讀
-            MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
-            var _product = _Products.FindOne();
-                            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //連結DB
-            MongoDatabase myDB;
-            List<MongoProduct> Products = new List<MongoProduct>();
-            MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
-            MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
-            myDB = server.GetDatabase("test"); // 取得 MongoDatabase 物件
-            
-            //寫
-            MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
-            var newProduct = new MongoProduct();
-            newProduct.txt = "";
-            newProduct.ip = cs.getIP().ToString();
-            newProduct.dtime = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-            _Products.Insert(newProduct);       
-        }      
 
     }
 }

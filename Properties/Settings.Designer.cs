@@ -73,82 +73,10 @@ namespace AutoBrowser.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.11.34.172\\c$\\list_p.txt")]
-        public string path1 {
-            get {
-                return ((string)(this["path1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.11.22.51\\d$\\113720\\list_p.txt")]
-        public string path2 {
-            get {
-                return ((string)(this["path2"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\AutoBrowser_log\\\\list_p.txt")]
         public string path_local {
             get {
                 return ((string)(this["path_local"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("administrator")]
-        public string id1 {
-            get {
-                return ((string)(this["id1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1qaz!QAZ")]
-        public string pw1 {
-            get {
-                return ((string)(this["pw1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("113720")]
-        public string id2 {
-            get {
-                return ((string)(this["id2"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("113720")]
-        public string pw2 {
-            get {
-                return ((string)(this["pw2"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.11.34.172\\c$")]
-        public string con1 {
-            get {
-                return ((string)(this["con1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.11.22.51\\d$")]
-        public string con2 {
-            get {
-                return ((string)(this["con2"]));
             }
         }
         
@@ -161,6 +89,18 @@ namespace AutoBrowser.Properties {
             }
             set {
                 this["logDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=10.11.9.191:27017")]
+        public string mongo {
+            get {
+                return ((string)(this["mongo"]));
+            }
+            set {
+                this["mongo"] = value;
             }
         }
     }
