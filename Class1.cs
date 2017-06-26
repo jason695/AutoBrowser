@@ -145,7 +145,7 @@ namespace AutoBrowser
         }
         #endregion
 
-        #region 轉換
+        #region 轉換CSV&DT
         //CSV TO DT
         public DataTable CsvToDt(string FilePath, string TableName, string delimiter)
         {
@@ -189,7 +189,7 @@ namespace AutoBrowser
 
                 foreach (string r in rows)
                 {
-                    string[] items = r.Split(delimiter.ToCharArray());
+                    string[] items = r.Replace("\r","").Split(delimiter.ToCharArray());
                     ds.Tables[TableName].Rows.Add(items);
                 }
 
