@@ -48,6 +48,8 @@ namespace AutoBrowser
             load_ini();
             getData_ini();
             getTips();
+
+            backgroundWorker1.RunWorkerAsync(); 
         }
         
         //欄位CHECK
@@ -420,6 +422,43 @@ namespace AutoBrowser
         {
             getData_ini();
         }
+        
+        #region ---APP_PUSH---
+        string app_push(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            System.Threading.Thread.Sleep(10000);    //等待時間，不要馬上執行
+            
+            string result = cs.mongo_read();
+            return result;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            e.Result = app_push(worker, e);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+           
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            else
+            {
+                path = AutoBrowser.Properties.Settings.Default.path_local.ToString();
+                DateTime dt = File.GetLastWriteTime(path);
+                //MessageBox.Show(e.Result.ToString() + Environment.NewLine + dt.ToString(), "TopMostMessageBox");
+                
+                if (Convert.ToDateTime(e.Result.ToString()) > dt)
+                {
+                    MessageBox.Show("來源名單有更新，請同步", "TopMostMessageBox");
+                }                
+            }
+        }
+        #endregion
 
         //人工同步
         //private void btnSYNC_Click(object sender, EventArgs e)

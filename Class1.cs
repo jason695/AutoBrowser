@@ -389,6 +389,34 @@ namespace AutoBrowser
             return Flag;
         }
 
+        public string mongo_read()
+        {
+            string str = "";
+
+            try
+            {
+                //連結DB
+                MongoDatabase myDB;
+                List<MongoProduct> Products = new List<MongoProduct>();
+                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+                MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
+                MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+                myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
+
+                //讀DB
+                MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+                var _product = _Products.FindOne();
+
+                str = _product.dtime.ToString();                             
+            }
+            catch (Exception ex)
+            {
+                wrLog(ex.ToString(), "mongo_read");
+                throw ex;
+            }
+
+            return str;
+        }
 
         public void mongo_upload()
         {

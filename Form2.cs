@@ -113,6 +113,9 @@ namespace AutoBrowser
             {
                 MessageBox.Show("請確認二次密碼輸入相同!!");
             }
+
+            //上送DB
+            cs.mongo_upload();
         }
 
         private void btnNEW_Click(object sender, EventArgs e)
@@ -128,8 +131,7 @@ namespace AutoBrowser
             txtID.Text = "";
             txtMAIL.Text = "";
             txtNAME.Text = "";
-
-
+            
             //上送DB
             cs.mongo_upload();
         }
@@ -157,8 +159,6 @@ namespace AutoBrowser
             txtMAIL.Text = "";
             txtNAME.Text = "";
         }
-
-       
-
+        
     }
 }
