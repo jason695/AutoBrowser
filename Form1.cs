@@ -454,7 +454,10 @@ namespace AutoBrowser
                 
                 if (Convert.ToDateTime(e.Result.ToString()) > dt)
                 {
-                    MessageBox.Show("來源名單有更新，請同步", "TopMostMessageBox");
+                    string str = "來源名單有更新，請同步!!";                    
+                    MessageBox.Show(str, "TopMostMessageBox");
+                    labMsg.ForeColor = Color.Red;
+                    labMsg.Text = str;
                 }                
             }
         }
