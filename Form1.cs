@@ -452,7 +452,7 @@ namespace AutoBrowser
                 DateTime dt = File.GetLastWriteTime(path);
                 //MessageBox.Show(e.Result.ToString() + Environment.NewLine + dt.ToString(), "TopMostMessageBox");
                 
-                if (Convert.ToDateTime(e.Result.ToString()) > dt)
+                if (Convert.ToDateTime(e.Result.ToString()) > dt) //本機文字檔有更新
                 {
                     string str = "來源名單有更新，請同步!!";                    
                     MessageBox.Show(str, "TopMostMessageBox");

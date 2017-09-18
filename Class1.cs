@@ -9,7 +9,7 @@ using System.Data;
 using System.Net;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+//using MongoDB.Driver.Builders;
 using System.Collections;
 
 
@@ -389,6 +389,7 @@ namespace AutoBrowser
             return Flag;
         }
 
+        //讀取
         public string mongo_read()
         {
             string str = "";
@@ -406,7 +407,7 @@ namespace AutoBrowser
                 //讀DB
                 MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
                 var _product = _Products.FindOne();
-
+                
                 str = _product.dtime.ToString();                             
             }
             catch (Exception ex)
@@ -418,6 +419,7 @@ namespace AutoBrowser
             return str;
         }
 
+        //更新
         public void mongo_upload()
         {
             try
@@ -445,7 +447,7 @@ namespace AutoBrowser
                 } while (sLine != null);
                 objReader.Close();
 
-                //寫DB
+                //寫DB,先TRUNCATE再INSERT,只留最新一筆
                 MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
                 var newProduct = new MongoProduct();
                 newProduct.txt = arrText;
@@ -454,6 +456,15 @@ namespace AutoBrowser
 
                 _Products.Drop();
                 _Products.Insert(newProduct);
+
+                //類LOG,不TRUNCATE
+                MongoCollection<MongoProduct> _Products_log = myDB.GetCollection<MongoProduct>("Products_LOG"); // 取得 Collection
+                var newProduct_log = new MongoProduct();
+                newProduct_log.txt = arrText;
+                newProduct_log.ip = getIP().ToString();
+                newProduct_log.dtime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                _Products_log.Insert(newProduct_log);
             }
             catch (Exception ex)
             {
