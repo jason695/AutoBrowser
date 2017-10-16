@@ -67,6 +67,9 @@ namespace AutoBrowser
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            //先同步
+            cs.mongo_sync();
+            
             //修改
             dt.Rows[e.RowIndex][e.ColumnIndex] = this.dataGridView1[e.ColumnIndex, this.dataGridView1.CurrentCell.RowIndex].Value.ToString();
             dt.AcceptChanges();
@@ -120,6 +123,9 @@ namespace AutoBrowser
 
         private void btnNEW_Click(object sender, EventArgs e)
         {
+            //先同步
+            cs.mongo_sync();            
+            
             DataRow workRow = dt.NewRow();
             workRow[0] = txtID.Text;
             workRow[1] = "";
@@ -138,6 +144,9 @@ namespace AutoBrowser
 
         private void btnDEL_Click(object sender, EventArgs e)
         {
+            //先同步
+            cs.mongo_sync();     
+            
             //刪除
             dataGridView1.Rows.Remove(this.dataGridView1.Rows[curRow]); 
             dt.AcceptChanges();
