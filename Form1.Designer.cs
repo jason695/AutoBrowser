@@ -294,7 +294,7 @@
         private System.Windows.Forms.Button btnSHUTDOWN;
         private System.Windows.Forms.Label labMsg;
         private System.Windows.Forms.Button btnLIST;
-        private System.Windows.Forms.TextBox txtPWD2;
+        public System.Windows.Forms.TextBox txtPWD2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btnSHUTDOWN2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;

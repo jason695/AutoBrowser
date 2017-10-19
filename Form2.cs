@@ -110,15 +110,26 @@ namespace AutoBrowser
                     dt.AcceptChanges();
                     cs.DtToCsv(dt, path);
 
-                    MessageBox.Show("修改完成!!");
+                    //上送DB
+                    cs.mongo_upload();
+
+                    if (labID.Text == AutoBrowser.Properties.Settings.Default.USR.ToString())
+                    {
+                        DialogResult myResult = MessageBox.Show("是否需同步LOCAL預設密碼?", "請選擇"
+                                        , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (myResult == DialogResult.Yes)
+                        {
+                            AutoBrowser.Properties.Settings.Default.PWD = cs.setDES(txtPWD1.Text);                            
+                        }
+                    }
+
+                    MessageBox.Show("修改完成!!");                   
             }
             else 
             {
                 MessageBox.Show("請確認二次密碼輸入相同!!");
-            }
-
-            //上送DB
-            cs.mongo_upload();
+            }            
         }
 
         private void btnNEW_Click(object sender, EventArgs e)

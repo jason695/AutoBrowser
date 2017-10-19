@@ -324,7 +324,10 @@ namespace AutoBrowser
         {
             Form2 frm = new Form2();
             frm.ShowDialog(this);
-            frm.Dispose();            
+            frm.Dispose();
+
+            //接收form2修改後的資料
+            txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD;
         }
 
         private void btnSHUTDOWN2_Click(object sender, EventArgs e)
@@ -426,7 +429,7 @@ namespace AutoBrowser
         #region ---APP_PUSH---
         string app_push(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.Sleep(10000);    //等待時間，不要馬上執行
+            System.Threading.Thread.Sleep(6000);    //等待時間，不要馬上執行
             
             string result = cs.mongo_read();
             return result;
