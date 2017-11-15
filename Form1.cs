@@ -99,7 +99,7 @@ namespace AutoBrowser
                 }
                 else
                 {
-                    sendMail();                    
+                    //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
                     cs.wrLog("LOG成功", txtID.Text);
                     prScrn();
 
@@ -293,6 +293,7 @@ namespace AutoBrowser
         private void btnCARD_Click(object sender, EventArgs e)
         {
             card();
+            sendMail();
         }
 
         //設定登入帳密

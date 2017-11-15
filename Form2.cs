@@ -120,7 +120,8 @@ namespace AutoBrowser
 
                         if (myResult == DialogResult.Yes)
                         {
-                            AutoBrowser.Properties.Settings.Default.PWD = cs.setDES(txtPWD1.Text);                            
+                            AutoBrowser.Properties.Settings.Default.PWD = cs.setDES(txtPWD1.Text);
+                            AutoBrowser.Properties.Settings.Default.Save();
                         }
                     }
 
