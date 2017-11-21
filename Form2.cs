@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-
 namespace AutoBrowser
 {
     public partial class Form2 : Form
@@ -31,7 +30,8 @@ namespace AutoBrowser
 
             dataGridView1.Columns["PWD"].ReadOnly = true;
             dataGridView1.Columns["PWD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; 
-            dataGridView1.Columns["MAIL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; 
+            dataGridView1.Columns["MAIL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView1.Columns["TOKEN"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; 
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

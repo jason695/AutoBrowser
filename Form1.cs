@@ -51,7 +51,8 @@ namespace AutoBrowser
 
             backgroundWorker1.RunWorkerAsync(); 
         }
-        
+
+        #region ---FUNCTION---
         //欄位CHECK
         public Boolean dataCheck()
         {
@@ -108,6 +109,55 @@ namespace AutoBrowser
                     labMsg.ForeColor = SystemColors.ControlText;
                     labMsg.Text = DateTime.Now.ToString() + "送出!";                    
                 }
+            }
+            catch (Exception ex)
+            {
+                cs.wrLog(ex.ToString(), txtID.Text);
+                //throw;
+                return;
+            }
+        }
+
+        public void card_test()
+        {
+            try
+            {
+                if (dataCheck() == false)
+                {
+                    return;
+                }
+
+                _IE = new IE();
+                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
+
+                //------------測試網頁--------------
+                //_IE.GoTo(@"C:\inetpub\wwwroot\test_err.htm");
+                //_IE.GoTo(@"C:\inetpub\wwwroot\test.htm");
+                //_IE.TextField(Find.ByName("TextBox1")).TypeText(textBox1.Text);
+                //_IE.Button(Find.ByName("Button1")).Click();
+
+             
+
+                _IE.WaitForComplete(2);
+
+                //if (_IE.Image(Find.ById("imgNo")).Exists)
+                //{
+                //    cs.wrLog("LOG失敗", txtID.Text);
+
+                //    labMsg.ForeColor = Color.Red;
+                //    labMsg.Text = DateTime.Now.ToString() + "失敗!";
+                //}
+                //else
+                //{
+                //    //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
+                //    cs.wrLog("LOG成功", txtID.Text);
+                //    prScrn();
+
+                //    _IE.Close();
+
+                //    labMsg.ForeColor = SystemColors.ControlText;
+                //    labMsg.Text = DateTime.Now.ToString() + "送出!";
+                //}
             }
             catch (Exception ex)
             {
@@ -270,6 +320,17 @@ namespace AutoBrowser
             }
         }
 
+        //呼叫WEB SERVICE,送訊息到LINE NOTIFY
+        public void sendLine(string token)
+        {
+            if (token != "")
+            {
+                //string result = null;
+                //ServiceReference1.NG8001SoapClient ws = new ServiceReference1.NG8001SoapClient();
+                //result = ws.Send(token);
+            }
+        }
+
         //截畫面
         public void prScrn(){
             try
@@ -288,8 +349,9 @@ namespace AutoBrowser
                 //throw;
             }
         }
+        #endregion
 
-        #region ---BUTTON---
+        #region ---控制項---
         private void btnCARD_Click(object sender, EventArgs e)
         {
             card();
@@ -331,6 +393,7 @@ namespace AutoBrowser
             txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD;
         }
 
+        //排程關機
         private void btnSHUTDOWN2_Click(object sender, EventArgs e)
         {
             DateTime dttx1 = DateTime.Parse(DateTime.Now.ToLongTimeString());
@@ -355,12 +418,13 @@ namespace AutoBrowser
         {
             if (cs.mongo_sync()==true)
             {
-                MessageBox.Show("SYNC OK!!");            
+                MessageBox.Show("SYNC OK!!");
+                labMsg.Text = "名單已同步...";
             }
                
         }
-        #endregion
-        
+
+        //預設帳密
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtID.Text = dt.Rows[comboBox1.SelectedIndex]["ID"].ToString();
@@ -370,6 +434,7 @@ namespace AutoBrowser
             getTips();
         }
 
+        //加密
         private void txtPWD1_Leave(object sender, EventArgs e)
         {
             if (txtPWD1.Text != "")
@@ -377,7 +442,15 @@ namespace AutoBrowser
                 txtPWD2.Text = cs.setDES(txtPWD1.Text);
             }
         }
+
+        //下拉選單
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            getData_ini();
+        }
+        #endregion
         
+        #region ---排程關機---
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             if (dateTimePicker1.Checked == true)
@@ -385,12 +458,13 @@ namespace AutoBrowser
                 btnSHUTDOWN2.Enabled = true;
                 label4.Text = " ";
             }
-            else {
+            else
+            {
                 btnSHUTDOWN2.Enabled = false;
                 if (label4.Text != " ")
                 {
                     label4.Text = "設定取消!!";
-                }                
+                }
                 timer1.Enabled = false;
             }
         }
@@ -399,12 +473,12 @@ namespace AutoBrowser
         {
             if (dateTimePicker1.Checked == true)
             {
-                
+
                 if (AutoBrowser.Properties.Settings.Default.TIME != "")
                 {
                     dateTimePicker1.Text = AutoBrowser.Properties.Settings.Default.TIME.ToString();
                 }
-                else 
+                else
                 {
                     dateTimePicker1.Text = "18:00"; //預設值為下班時間
                 }
@@ -413,20 +487,16 @@ namespace AutoBrowser
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-             string time = DateTime.Now.ToShortTimeString();
-             if (dateTimePicker1.Value.ToShortTimeString() == time)
-             {
-                 timer1.Enabled = false;
-                 card();
-                 shutdown();
-             }             
+            string time = DateTime.Now.ToShortTimeString();
+            if (dateTimePicker1.Value.ToShortTimeString() == time)
+            {
+                timer1.Enabled = false;
+                card();
+                shutdown();
+            }
         }
+        #endregion
 
-        private void comboBox1_Click(object sender, EventArgs e)
-        {
-            getData_ini();
-        }
-        
         #region ---APP_PUSH---
         string app_push(BackgroundWorker worker, DoWorkEventArgs e)
         {
