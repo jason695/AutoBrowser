@@ -129,7 +129,7 @@ namespace AutoBrowser
                 }
 
                 _IE = new IE();
-                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
+                //_IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
 
                 _IE.GoTo(@"http://sinocloud.sph/Login.aspx");
                 _IE.TextField(Find.ById("txtUserID_txtData")).TypeText(txtID.Text);
@@ -138,9 +138,28 @@ namespace AutoBrowser
 
                 System.Threading.Thread.Sleep(10000);
                
-                _IE.GoTo(@"http://sinocloud.sph/Main.aspx");
-             
+                _IE.GoTo(@"http://sinocloud.sph/Main.aspx");             
                 _IE.Link(Find.ByUrl(new System.Text.RegularExpressions.Regex("打卡"))).Click();
+
+                IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle("打卡完成"));
+
+                if (_NEWIE.Span(Find.ById("ResultMsg")).Text != "打卡成功")
+                {
+                    cs.wrLog("LOG失敗", txtID.Text);
+
+                    labMsg.ForeColor = Color.Red;
+                    labMsg.Text = DateTime.Now.ToString() + "失敗!";
+                }
+                else
+                {
+                    //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
+                    cs.wrLog("LOG成功", txtID.Text);
+                    prScrn();
+
+                    labMsg.ForeColor = SystemColors.ControlText;
+                    labMsg.Text = DateTime.Now.ToString() + "送出!";                    
+                }
+            
                 _IE.Close();
 
                 //////
