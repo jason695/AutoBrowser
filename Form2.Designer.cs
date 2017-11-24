@@ -87,11 +87,12 @@
             // 
             this.labID.AutoSize = true;
             this.labID.BackColor = System.Drawing.Color.Red;
-            this.labID.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labID.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labID.ForeColor = System.Drawing.Color.White;
             this.labID.Location = new System.Drawing.Point(33, 22);
             this.labID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labID.Name = "labID";
-            this.labID.Size = new System.Drawing.Size(36, 12);
+            this.labID.Size = new System.Drawing.Size(50, 16);
             this.labID.TabIndex = 3;
             this.labID.Text = "NONE";
             // 
@@ -290,7 +291,9 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Form2";
             this.Text = "名單維護";
             this.Load += new System.EventHandler(this.Form2_Load);
