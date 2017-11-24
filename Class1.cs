@@ -10,6 +10,7 @@ using System.Net;
 using MongoDB.Bson;
 using MongoDB.Driver;
 //using MongoDB.Driver.Builders;
+
 using System.Collections;
 
 
@@ -354,18 +355,26 @@ namespace AutoBrowser
             
             try
             {
+                //-----改寫舊語法 START------
                 //連結DB
-                MongoDatabase myDB;
-                List<MongoProduct> Products = new List<MongoProduct>();
-                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
-                MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
-                MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
-                myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
+                //MongoDatabase myDB;
+                //List<MongoProduct> Products = new List<MongoProduct>();
+                ////MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+                //MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
+                //MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+                //myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
 
                 //讀DB
-                MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
-                var _product = _Products.FindOne();
-                
+                //MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+                //var _product = _Products.FindOne();
+                //-----改寫舊語法 END------
+                var client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString());
+                var myDB = client.GetDatabase("AutoBrowser");
+                IMongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+
+                //讀DB,第一筆
+                var _product = _Products.Find(new BsonDocument()).First();
+                                
                 //寫檔
                 StreamWriter file = new StreamWriter(path, false, Encoding.Default);
 
@@ -396,19 +405,27 @@ namespace AutoBrowser
 
             try
             {
+                //-----改寫舊語法 START------
                 //連結DB
-                MongoDatabase myDB;
-                List<MongoProduct> Products = new List<MongoProduct>();
-                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
-                MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
-                MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
-                myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
-
-                //讀DB
-                MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
-                var _product = _Products.FindOne();
+                //MongoDatabase myDB;
+                //List<MongoProduct> Products = new List<MongoProduct>();
                 
-                str = _product.dtime.ToString();                             
+                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+                ////MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
+                //MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+                //myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
+                
+                //讀DB
+                //MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+                //var _product = _Products.FindOne();
+                //-----改寫舊語法 END------
+                var client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString());
+                var myDB = client.GetDatabase("AutoBrowser");
+                IMongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+
+                //讀DB,第一筆
+                var _product = _Products.Find(new BsonDocument()).First();
+                str = _product.dtime.ToString();                        
             }
             catch (Exception ex)
             {
@@ -424,14 +441,18 @@ namespace AutoBrowser
         {
             try
             {
+                //-----改寫舊語法 START------
                 //連結DB
-                MongoDatabase myDB;
-                List<MongoProduct> Products = new List<MongoProduct>();
-                //MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
-                MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
-                MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
-                myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
-
+                //MongoDatabase myDB;
+                //List<MongoProduct> Products = new List<MongoProduct>();
+                ////MongoClient _client = new MongoClient("Server=localhost:27017"); // 產生 MongoClient 物件
+                //MongoClient _client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString()); // 產生 MongoClient 物件
+                //MongoServer server = _client.GetServer(); // 取得 MongoServer 物件
+                //myDB = server.GetDatabase("AutoBrowser"); // 取得 MongoDatabase 物件
+                //-----改寫舊語法 END------               
+                var client = new MongoClient(AutoBrowser.Properties.Settings.Default.mongo.ToString());
+                var myDB = client.GetDatabase("AutoBrowser");
+                
                 //讀檔
                 StreamReader objReader = new StreamReader(path, Encoding.Default);
                 string sLine = "";
@@ -448,23 +469,32 @@ namespace AutoBrowser
                 objReader.Close();
 
                 //寫DB,先TRUNCATE再INSERT,只留最新一筆
-                MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
+                //-----改寫舊語法 START------
+                //MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
+                //-----改寫舊語法 END------
+                IMongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
+
                 var newProduct = new MongoProduct();
                 newProduct.txt = arrText;
                 newProduct.ip = getIP().ToString();
                 newProduct.dtime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
-                _Products.Drop();
-                _Products.Insert(newProduct);
+                //-----改寫舊語法 START------
+                //_Products.Drop();
+                //_Products.Insert(newProduct);
+                //-----改寫舊語法 END------
+                myDB.DropCollection("Products");                
+                _Products.InsertOne(newProduct);
+
 
                 //類LOG,不TRUNCATE
-                MongoCollection<MongoProduct> _Products_log = myDB.GetCollection<MongoProduct>("Products_LOG"); // 取得 Collection
+                IMongoCollection<MongoProduct> _Products_log = myDB.GetCollection<MongoProduct>("Products_LOG"); // 取得 Collection
                 var newProduct_log = new MongoProduct();
                 newProduct_log.txt = arrText;
                 newProduct_log.ip = getIP().ToString();
                 newProduct_log.dtime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
-                _Products_log.Insert(newProduct_log);
+                _Products_log.InsertOne(newProduct_log);
             }
             catch (Exception ex)
             {

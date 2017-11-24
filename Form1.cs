@@ -65,8 +65,8 @@ namespace AutoBrowser
             }     
         }
 
-        //打卡
-        public void card()
+        //打卡_舊版
+        public void card_OLD()
         {
             try
             {
@@ -118,7 +118,8 @@ namespace AutoBrowser
             }
         }
 
-        public void card_test()
+        //打卡
+        public void card()
         {
             try
             {
@@ -130,34 +131,27 @@ namespace AutoBrowser
                 _IE = new IE();
                 _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
 
-                //------------測試網頁--------------
-                //_IE.GoTo(@"C:\inetpub\wwwroot\test_err.htm");
-                //_IE.GoTo(@"C:\inetpub\wwwroot\test.htm");
-                //_IE.TextField(Find.ByName("TextBox1")).TypeText(textBox1.Text);
-                //_IE.Button(Find.ByName("Button1")).Click();
+                _IE.GoTo(@"http://sinocloud.sph/Login.aspx");
+                _IE.TextField(Find.ById("txtUserID_txtData")).TypeText(txtID.Text);
+                _IE.TextField(Find.ById("txtPassword_txtData")).TypeText(cs.getDES(txtPWD2.Text));
+                _IE.Button(Find.ByName("btnLogin")).ClickNoWait();
 
+                System.Threading.Thread.Sleep(10000);
+               
+                _IE.GoTo(@"http://sinocloud.sph/Main.aspx");
              
+                _IE.Link(Find.ByUrl(new System.Text.RegularExpressions.Regex("打卡"))).Click();
+                _IE.Close();
 
-                _IE.WaitForComplete(2);
-
-                //if (_IE.Image(Find.ById("imgNo")).Exists)
-                //{
-                //    cs.wrLog("LOG失敗", txtID.Text);
-
-                //    labMsg.ForeColor = Color.Red;
-                //    labMsg.Text = DateTime.Now.ToString() + "失敗!";
-                //}
-                //else
-                //{
-                //    //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
-                //    cs.wrLog("LOG成功", txtID.Text);
-                //    prScrn();
-
-                //    _IE.Close();
-
-                //    labMsg.ForeColor = SystemColors.ControlText;
-                //    labMsg.Text = DateTime.Now.ToString() + "送出!";
-                //}
+                //////
+                //IE ie = new IE("http://localhost/Test/");
+                //点击按钮，打开新窗口test2
+                //ie.Button(Find.ById("Button1")).Click();
+                //查找新窗口test2并赋给新的IE对象
+                //IE newie = IE.AttachTo<IE>(Find.ByTitle("test2"));
+                //使用新的IE对象就可以继续对新窗口进行操作了
+                //newie.TextField(Find.ById("Text1")).TypeText("this is new ie");
+                //////                
             }
             catch (Exception ex)
             {
@@ -536,6 +530,7 @@ namespace AutoBrowser
             }
         }
         #endregion
+              
 
         //人工同步
         //private void btnSYNC_Click(object sender, EventArgs e)

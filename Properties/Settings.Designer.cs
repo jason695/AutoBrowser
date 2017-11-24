@@ -94,7 +94,7 @@ namespace AutoBrowser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017")]
+        [global::System.Configuration.DefaultSettingValueAttribute("mongodb://10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017")]
         public string mongo {
             get {
                 return ((string)(this["mongo"]));

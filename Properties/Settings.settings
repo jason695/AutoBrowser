@@ -21,7 +21,7 @@
       <Value Profile="(Default)">c:\AutoBrowser_log\</Value>
     </Setting>
     <Setting Name="mongo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017</Value>
+      <Value Profile="(Default)">mongodb://10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017</Value>
     </Setting>
   </Settings>
 </SettingsFile>
