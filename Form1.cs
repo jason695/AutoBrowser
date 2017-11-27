@@ -11,12 +11,10 @@ using System.Net.Mail;
 using System.IO;
 using System.Xml;
 using System.Data.SqlClient;
-//using WindowsFormsControlLibrary1;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Runtime.InteropServices;
 using System.Reflection;
 //using System.Diagnostics;     // to use Missing.Value
-
 
 namespace AutoBrowser
 {
@@ -41,9 +39,7 @@ namespace AutoBrowser
             txtID.Text = AutoBrowser.Properties.Settings.Default.USR.ToString();
             txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD.ToString();
             txtMAIL.Text = AutoBrowser.Properties.Settings.Default.MAL.ToString();
-
-            //UC1
-            //this.userControl1.myClick += new EventHandler(myButtonHandler); 
+            labTOKEN.Text = AutoBrowser.Properties.Settings.Default.TOKEN.ToString();
 
             load_ini();
             getData_ini();
@@ -66,59 +62,58 @@ namespace AutoBrowser
         }
 
         //打卡_舊版
-        public void card_OLD()
-        {
-            try
-            {
-                if (dataCheck() == false)
-                {
-                    return;
-                }
+        //public void card_OLD()
+        //{
+        //    try
+        //    {
+        //        if (dataCheck() == false)
+        //        {
+        //            return;
+        //        }
                         
-                _IE = new IE();
-                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
+        //        _IE = new IE();
+        //        _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
 
-                //------------測試網頁--------------
-                //_IE.GoTo(@"C:\inetpub\wwwroot\test_err.htm");
-                //_IE.GoTo(@"C:\inetpub\wwwroot\test.htm");
-                //_IE.TextField(Find.ByName("TextBox1")).TypeText(textBox1.Text);
-                //_IE.Button(Find.ByName("Button1")).Click();
+        //        //------------測試網頁--------------
+        //        //_IE.GoTo(@"C:\inetpub\wwwroot\test_err.htm");
+        //        //_IE.GoTo(@"C:\inetpub\wwwroot\test.htm");
+        //        //_IE.TextField(Find.ByName("TextBox1")).TypeText(textBox1.Text);
+        //        //_IE.Button(Find.ByName("Button1")).Click();
 
-                _IE.GoTo("http://signio.bsp/");
-                _IE.TextField(Find.ByName("txtUserId")).TypeText(txtID.Text);
-                _IE.TextField(Find.ByName("txtPassword")).TypeText(cs.getDES(txtPWD2.Text));
-                _IE.Button(Find.ByName("btnSignIn")).Click();
+        //        _IE.GoTo("http://signio.bsp/");
+        //        _IE.TextField(Find.ByName("txtUserId")).TypeText(txtID.Text);
+        //        _IE.TextField(Find.ByName("txtPassword")).TypeText(cs.getDES(txtPWD2.Text));
+        //        _IE.Button(Find.ByName("btnSignIn")).Click();
 
-                _IE.WaitForComplete(2);
+        //        _IE.WaitForComplete(2);
 
-                if (_IE.Image(Find.ById("imgNo")).Exists)
-                {
-                    cs.wrLog("LOG失敗", txtID.Text);
+        //        if (_IE.Image(Find.ById("imgNo")).Exists)
+        //        {
+        //            cs.wrLog("LOG失敗", txtID.Text);
 
-                    labMsg.ForeColor = Color.Red;
-                    labMsg.Text = DateTime.Now.ToString() + "失敗!";
-                }
-                else
-                {
-                    //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
-                    cs.wrLog("LOG成功", txtID.Text);
-                    prScrn();
+        //            labMsg.ForeColor = Color.Red;
+        //            labMsg.Text = DateTime.Now.ToString() + "失敗!";
+        //        }
+        //        else
+        //        {
+        //            //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
+        //            cs.wrLog("LOG成功", txtID.Text);
+        //            prScrn();
 
-                    _IE.Close();
+        //            _IE.Close();
 
-                    labMsg.ForeColor = SystemColors.ControlText;
-                    labMsg.Text = DateTime.Now.ToString() + "送出!";                    
-                }
-            }
-            catch (Exception ex)
-            {
-                cs.wrLog(ex.ToString(), txtID.Text);
-                //throw;
-                return;
-            }
-        }
+        //            labMsg.ForeColor = SystemColors.ControlText;
+        //            labMsg.Text = DateTime.Now.ToString() + "送出!";                    
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        cs.wrLog(ex.ToString(), txtID.Text);
+        //        //throw;
+        //        return;
+        //    }
+        //}
 
-        //打卡
         public void card()
         {
             try
@@ -141,23 +136,21 @@ namespace AutoBrowser
                 _IE.GoTo(@"http://sinocloud.sph/Main.aspx");             
                 _IE.Link(Find.ByUrl(new System.Text.RegularExpressions.Regex("打卡"))).Click();
 
-                IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle("打卡完成"));
+                IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle(new System.Text.RegularExpressions.Regex("打卡")));
 
-                if (_NEWIE.Span(Find.ById("ResultMsg")).Text != "打卡成功")
+                //if (_NEWIE.Span(Find.ById("ResultMsg")).Text == "打卡成功")
+                if (_NEWIE.Title == "打卡成功")
                 {
-                    cs.wrLog("LOG失敗", txtID.Text);
+                    sendLine(labTOKEN.Text.ToString());
+                    cs.wrLog("打卡成功", txtID.Text);
+                    prScrn();
 
-                    labMsg.ForeColor = Color.Red;
-                    labMsg.Text = DateTime.Now.ToString() + "失敗!";
+                    msgBar("打卡送出!");
                 }
                 else
                 {
-                    //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
-                    cs.wrLog("LOG成功", txtID.Text);
-                    prScrn();
-
-                    labMsg.ForeColor = SystemColors.ControlText;
-                    labMsg.Text = DateTime.Now.ToString() + "送出!";                    
+                    cs.wrLog("打卡異常，請手動填入說明原因", txtID.Text);
+                    msgBar("打卡異常，請手動填入說明原因!", 1);
                 }
             
                 _IE.Close();
@@ -194,7 +187,7 @@ namespace AutoBrowser
             }
         }
         
-        //建立程式執行目錄
+        //程式初始化
         public void load_ini()
         {
             path = logDir;
@@ -339,7 +332,7 @@ namespace AutoBrowser
             if (token != "")
             {
                 //string result = null;
-                //ServiceReference1.NG8001SoapClient ws = new ServiceReference1.NG8001SoapClient();
+                //ServiceReference1.LINEClient ws = new ServiceReference1.LINEClient();
                 //result = ws.Send(token);
             }
         }
@@ -362,13 +355,35 @@ namespace AutoBrowser
                 //throw;
             }
         }
+
+        //訊息欄控制(0:正常,非0:異常)
+        public void msgBar(string msg, int clr = 0)
+        {
+            try
+            {
+                if (clr == 0)
+                {
+                    labMsg.ForeColor = SystemColors.ControlText;    
+                }
+                else {
+                    labMsg.ForeColor = Color.Red; 
+                }
+
+                labMsg.Text = DateTime.Now.ToString() + "," + msg;                       
+            }
+            catch (Exception ex)
+            {
+                cs.wrLog(ex.ToString(), txtID.Text);
+                //throw;
+            }
+        }
+
         #endregion
 
         #region ---控制項---
         private void btnCARD_Click(object sender, EventArgs e)
         {
-            card();
-            sendMail();
+            card();            
         }
 
         //設定登入帳密
@@ -381,11 +396,13 @@ namespace AutoBrowser
             {
                 AutoBrowser.Properties.Settings.Default.TIME = dateTimePicker1.Text;
             }
+            AutoBrowser.Properties.Settings.Default.TOKEN = labTOKEN.Text.ToString();
             AutoBrowser.Properties.Settings.Default.Save();
 
             MessageBox.Show("帳號、密碼、MAIL、排程時間預設值設定完成!!");
         }
 
+        //立即關機
         private void btnSHUTDOWN_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("OS會立即關機，請再次確認!!", "Confirm Message", MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -432,17 +449,18 @@ namespace AutoBrowser
             if (cs.mongo_sync()==true)
             {
                 MessageBox.Show("SYNC OK!!");
-                labMsg.Text = "名單已同步...";
+                msgBar("名單已同步...");
             }
                
         }
 
-        //預設帳密
+        //取得帳密
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtID.Text = dt.Rows[comboBox1.SelectedIndex]["ID"].ToString();
             txtPWD2.Text = dt.Rows[comboBox1.SelectedIndex]["PWD"].ToString();
             txtMAIL.Text = dt.Rows[comboBox1.SelectedIndex]["MAIL"].ToString();
+            labTOKEN.Text = dt.Rows[comboBox1.SelectedIndex]["TOKEN"].ToString();
 
             getTips();
         }
@@ -543,14 +561,12 @@ namespace AutoBrowser
                 {
                     string str = "來源名單有更新，請同步!!";                    
                     MessageBox.Show(str, "TopMostMessageBox");
-                    labMsg.ForeColor = Color.Red;
-                    labMsg.Text = str;
+                    msgBar(str, 1);
                 }                
             }
         }
         #endregion
-              
-
+        
         //人工同步
         //private void btnSYNC_Click(object sender, EventArgs e)
         //{

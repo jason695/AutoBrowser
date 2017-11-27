@@ -49,6 +49,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSYNC = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.labTOKEN = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -249,11 +250,21 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // labTOKEN
+            // 
+            this.labTOKEN.AutoSize = true;
+            this.labTOKEN.Location = new System.Drawing.Point(18, 238);
+            this.labTOKEN.Name = "labTOKEN";
+            this.labTOKEN.Size = new System.Drawing.Size(43, 12);
+            this.labTOKEN.TabIndex = 101;
+            this.labTOKEN.Text = "TOKEN";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 281);
+            this.Controls.Add(this.labTOKEN);
             this.Controls.Add(this.btnSYNC);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -303,6 +314,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSYNC;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label labTOKEN;
 
     }
 }

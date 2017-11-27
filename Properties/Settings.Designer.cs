@@ -103,5 +103,17 @@ namespace AutoBrowser.Properties {
                 this["mongo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TOKEN {
+            get {
+                return ((string)(this["TOKEN"]));
+            }
+            set {
+                this["TOKEN"] = value;
+            }
+        }
     }
 }
