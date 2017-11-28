@@ -115,5 +115,17 @@ namespace AutoBrowser.Properties {
                 this["TOKEN"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NAME {
+            get {
+                return ((string)(this["NAME"]));
+            }
+            set {
+                this["NAME"] = value;
+            }
+        }
     }
 }

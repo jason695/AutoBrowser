@@ -50,6 +50,7 @@
             this.btnSYNC = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.labTOKEN = new System.Windows.Forms.Label();
+            this.labNAME = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -258,12 +259,24 @@
             this.labTOKEN.Size = new System.Drawing.Size(43, 12);
             this.labTOKEN.TabIndex = 101;
             this.labTOKEN.Text = "TOKEN";
+            this.labTOKEN.Visible = false;
+            // 
+            // labNAME
+            // 
+            this.labNAME.AutoSize = true;
+            this.labNAME.Location = new System.Drawing.Point(20, 250);
+            this.labNAME.Name = "labNAME";
+            this.labNAME.Size = new System.Drawing.Size(38, 12);
+            this.labNAME.TabIndex = 103;
+            this.labNAME.Text = "NAME";
+            this.labNAME.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 281);
+            this.Controls.Add(this.labNAME);
             this.Controls.Add(this.labTOKEN);
             this.Controls.Add(this.btnSYNC);
             this.Controls.Add(this.groupBox1);
@@ -315,6 +328,7 @@
         private System.Windows.Forms.Button btnSYNC;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label labTOKEN;
+        private System.Windows.Forms.Label labNAME;
 
     }
 }

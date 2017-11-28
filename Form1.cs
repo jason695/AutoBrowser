@@ -40,6 +40,7 @@ namespace AutoBrowser
             txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD.ToString();
             txtMAIL.Text = AutoBrowser.Properties.Settings.Default.MAL.ToString();
             labTOKEN.Text = AutoBrowser.Properties.Settings.Default.TOKEN.ToString();
+            labNAME.Text = AutoBrowser.Properties.Settings.Default.NAME.ToString();
 
             load_ini();
             getData_ini();
@@ -125,6 +126,7 @@ namespace AutoBrowser
 
                 _IE = new IE();
                 //_IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
+                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Show);
 
                 _IE.GoTo(@"http://sinocloud.sph/Login.aspx");
                 _IE.TextField(Find.ById("txtUserID_txtData")).TypeText(txtID.Text);
@@ -139,9 +141,9 @@ namespace AutoBrowser
                 IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle(new System.Text.RegularExpressions.Regex("打卡")));
 
                 //if (_NEWIE.Span(Find.ById("ResultMsg")).Text == "打卡成功")
-                if (_NEWIE.Title == "打卡成功")
+                if (_NEWIE.Title == "打卡完成")
                 {
-                    sendLine(labTOKEN.Text.ToString());
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡完成!!");
                     cs.wrLog("打卡成功", txtID.Text);
                     prScrn();
 
@@ -151,6 +153,7 @@ namespace AutoBrowser
                 {
                     cs.wrLog("打卡異常，請手動填入說明原因", txtID.Text);
                     msgBar("打卡異常，請手動填入說明原因!", 1);
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常，請手動填入說明原因!");
                 }
             
                 _IE.Close();
@@ -327,13 +330,13 @@ namespace AutoBrowser
         }
 
         //呼叫WEB SERVICE,送訊息到LINE NOTIFY
-        public void sendLine(string token)
+        public void sendLine(string token,string msg)
         {
             if (token != "")
             {
-                //string result = null;
-                //ServiceReference1.LINEClient ws = new ServiceReference1.LINEClient();
-                //result = ws.Send(token);
+                string result = null;
+                ServiceReference1.WSSoapClient ws = new ServiceReference1.WSSoapClient();
+                result = ws.Send(token, msg);
             }
         }
 
@@ -397,6 +400,7 @@ namespace AutoBrowser
                 AutoBrowser.Properties.Settings.Default.TIME = dateTimePicker1.Text;
             }
             AutoBrowser.Properties.Settings.Default.TOKEN = labTOKEN.Text.ToString();
+            AutoBrowser.Properties.Settings.Default.NAME = labNAME.Text.ToString();
             AutoBrowser.Properties.Settings.Default.Save();
 
             MessageBox.Show("帳號、密碼、MAIL、排程時間預設值設定完成!!");
@@ -461,6 +465,7 @@ namespace AutoBrowser
             txtPWD2.Text = dt.Rows[comboBox1.SelectedIndex]["PWD"].ToString();
             txtMAIL.Text = dt.Rows[comboBox1.SelectedIndex]["MAIL"].ToString();
             labTOKEN.Text = dt.Rows[comboBox1.SelectedIndex]["TOKEN"].ToString();
+            labNAME.Text = dt.Rows[comboBox1.SelectedIndex]["NAME"].ToString();
 
             getTips();
         }
@@ -566,7 +571,7 @@ namespace AutoBrowser
             }
         }
         #endregion
-        
+
         //人工同步
         //private void btnSYNC_Click(object sender, EventArgs e)
         //{
