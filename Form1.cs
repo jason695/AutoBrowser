@@ -35,13 +35,8 @@ namespace AutoBrowser
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "打卡-" + cs.getVer();
-            
-            txtID.Text = AutoBrowser.Properties.Settings.Default.USR.ToString();
-            txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD.ToString();
-            txtMAIL.Text = AutoBrowser.Properties.Settings.Default.MAL.ToString();
-            labTOKEN.Text = AutoBrowser.Properties.Settings.Default.TOKEN.ToString();
-            labNAME.Text = AutoBrowser.Properties.Settings.Default.NAME.ToString();
 
+            getPARM();
             load_ini();
             getData_ini();
             getTips();
@@ -125,8 +120,7 @@ namespace AutoBrowser
                 }
 
                 _IE = new IE();
-                //_IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
-                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Show);
+                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.ShowDefault);
 
                 _IE.GoTo(@"http://sinocloud.sph/Login.aspx");
                 _IE.TextField(Find.ById("txtUserID_txtData")).TypeText(txtID.Text);
@@ -147,13 +141,19 @@ namespace AutoBrowser
                     cs.wrLog("打卡成功", txtID.Text);
                     prScrn();
 
-                    msgBar("打卡送出!");
+                    msgBar("打卡送出!!");
+                }
+                else if (_NEWIE.Title == "打卡異常")
+                {
+                    cs.wrLog("打卡異常", txtID.Text);
+                    msgBar("打卡異常!!", 1);
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常!!");
                 }
                 else
                 {
-                    cs.wrLog("打卡異常，請手動填入說明原因", txtID.Text);
-                    msgBar("打卡異常，請手動填入說明原因!", 1);
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常，請手動填入說明原因!");
+                    cs.wrLog("打卡失敗", txtID.Text);
+                    msgBar("打卡失敗!!", 1);
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡失敗!!");
                 }
             
                 _IE.Close();
@@ -381,6 +381,29 @@ namespace AutoBrowser
             }
         }
 
+        //設定預設值
+        public void setPARM() {
+            AutoBrowser.Properties.Settings.Default.USR = txtID.Text.ToString();
+            AutoBrowser.Properties.Settings.Default.PWD = txtPWD2.Text.ToString();
+            AutoBrowser.Properties.Settings.Default.MAL = txtMAIL.Text.ToString();
+            if (dateTimePicker1.Checked == true)
+            {
+                AutoBrowser.Properties.Settings.Default.TIME = dateTimePicker1.Text;
+            }
+            AutoBrowser.Properties.Settings.Default.TOKEN = labTOKEN.Text.ToString();
+            AutoBrowser.Properties.Settings.Default.NAME = labNAME.Text.ToString();
+            AutoBrowser.Properties.Settings.Default.Save();
+        }
+
+        //取得預設值
+        public void getPARM()
+        {
+            txtID.Text = AutoBrowser.Properties.Settings.Default.USR.ToString();
+            txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD.ToString();
+            txtMAIL.Text = AutoBrowser.Properties.Settings.Default.MAL.ToString();
+            labTOKEN.Text = AutoBrowser.Properties.Settings.Default.TOKEN.ToString();
+            labNAME.Text = AutoBrowser.Properties.Settings.Default.NAME.ToString();
+        }
         #endregion
 
         #region ---控制項---
@@ -392,16 +415,7 @@ namespace AutoBrowser
         //設定登入帳密
         private void btnSET_Click(object sender, EventArgs e)
         {
-            AutoBrowser.Properties.Settings.Default.USR = txtID.Text.ToString();
-            AutoBrowser.Properties.Settings.Default.PWD = txtPWD2.Text.ToString();
-            AutoBrowser.Properties.Settings.Default.MAL = txtMAIL.Text.ToString();
-            if (dateTimePicker1.Checked == true)
-            {
-                AutoBrowser.Properties.Settings.Default.TIME = dateTimePicker1.Text;
-            }
-            AutoBrowser.Properties.Settings.Default.TOKEN = labTOKEN.Text.ToString();
-            AutoBrowser.Properties.Settings.Default.NAME = labNAME.Text.ToString();
-            AutoBrowser.Properties.Settings.Default.Save();
+            setPARM();
 
             MessageBox.Show("帳號、密碼、MAIL、排程時間預設值設定完成!!");
         }
@@ -458,9 +472,16 @@ namespace AutoBrowser
                
         }
 
-        //取得帳密
+        //下拉選單
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            getData_ini();
+        }
+
+        //下拉選單取得帳密
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //接續getData_ini後的動作
             txtID.Text = dt.Rows[comboBox1.SelectedIndex]["ID"].ToString();
             txtPWD2.Text = dt.Rows[comboBox1.SelectedIndex]["PWD"].ToString();
             txtMAIL.Text = dt.Rows[comboBox1.SelectedIndex]["MAIL"].ToString();
@@ -477,12 +498,6 @@ namespace AutoBrowser
             {
                 txtPWD2.Text = cs.setDES(txtPWD1.Text);
             }
-        }
-
-        //下拉選單
-        private void comboBox1_Click(object sender, EventArgs e)
-        {
-            getData_ini();
         }
         #endregion
         
