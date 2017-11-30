@@ -155,7 +155,8 @@ namespace AutoBrowser
                     msgBar("打卡失敗!!", 1);
                     sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡失敗!!");
                 }
-            
+
+                _IE.GoTo(@"http://sinocloud.sph/Login.aspx");           
                 _IE.Close();
 
                 //////
@@ -345,7 +346,7 @@ namespace AutoBrowser
             try
             {
                 path = logDir;
-                String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMdd") + "_" + txtID.Text.ToString() + ".jpg";
+                String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMddHHmm") + "_" + txtID.Text.ToString() + ".jpg";
 
                 Bitmap myImage = new Bitmap(1920, 1080);
                 Graphics g = Graphics.FromImage(myImage);
