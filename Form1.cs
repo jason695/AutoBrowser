@@ -120,7 +120,7 @@ namespace AutoBrowser
                 }
 
                 _IE = new IE();
-                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.ShowDefault);
+                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.ShowNormal);
 
                 _IE.GoTo(@"http://sinocloud.sph/Login.aspx");
                 _IE.TextField(Find.ById("txtUserID_txtData")).TypeText(txtID.Text);
@@ -137,26 +137,25 @@ namespace AutoBrowser
                 //if (_NEWIE.Span(Find.ById("ResultMsg")).Text == "打卡成功")
                 if (_NEWIE.Title == "打卡完成")
                 {
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡完成!!");
                     cs.wrLog("打卡成功", txtID.Text);
-                    prScrn();
-
-                    msgBar("打卡送出!!");
+                    msgBar("打卡成功!!");
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡完成!!");
+                    _IE.GoTo(@"http://sinocloud.sph/Login.aspx"); //登出   
                 }
                 else if (_NEWIE.Title == "打卡異常")
                 {
                     cs.wrLog("打卡異常", txtID.Text);
                     msgBar("打卡異常!!", 1);
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常!!");
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常(退勤打卡時間較正常下班(或值勤)時間晚15分鐘)");
                 }
                 else
                 {
                     cs.wrLog("打卡失敗", txtID.Text);
                     msgBar("打卡失敗!!", 1);
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡失敗!!");
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡~~~失敗~~~!!");
                 }
 
-                _IE.GoTo(@"http://sinocloud.sph/Login.aspx");           
+                prScrn();  
                 _IE.Close();
 
                 //////
@@ -346,7 +345,7 @@ namespace AutoBrowser
             try
             {
                 path = logDir;
-                String file = @"screen" + DateTime.Now.Date.ToString("yyyyMMddHHmm") + "_" + txtID.Text.ToString() + ".jpg";
+                String file = @"screen" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + txtID.Text.ToString() + ".jpg";
 
                 Bitmap myImage = new Bitmap(1920, 1080);
                 Graphics g = Graphics.FromImage(myImage);
