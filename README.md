@@ -96,5 +96,5 @@ net use \\@remoteHost @passWord /user:@userName
 ## @20171124 (V2.4.5.6)		
 * 1)改為登入永豐雲打卡
 
-## @20171124 (V2.4.5.7)		
+## @20171128 (V2.4.5.7)		
 * 1)新增LINE NOTIFY通知功能,相關說明請參考:支援LINE通知.docx
