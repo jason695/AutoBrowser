@@ -38,19 +38,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtMAIL = new System.Windows.Forms.TextBox();
             this.btnSHUTDOWN = new System.Windows.Forms.Button();
-            this.labMsg = new System.Windows.Forms.Label();
             this.btnLIST = new System.Windows.Forms.Button();
             this.txtPWD2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnSHUTDOWN2 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.chkSHUTDOWN = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSYNC = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.labTOKEN = new System.Windows.Forms.Label();
             this.labNAME = new System.Windows.Forms.Label();
+            this.lstMsg = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +127,7 @@
             // btnSHUTDOWN
             // 
             this.btnSHUTDOWN.BackColor = System.Drawing.Color.Red;
+            this.btnSHUTDOWN.ForeColor = System.Drawing.Color.White;
             this.btnSHUTDOWN.Location = new System.Drawing.Point(213, 193);
             this.btnSHUTDOWN.Margin = new System.Windows.Forms.Padding(2);
             this.btnSHUTDOWN.Name = "btnSHUTDOWN";
@@ -135,18 +136,6 @@
             this.btnSHUTDOWN.Text = "打卡後關機";
             this.btnSHUTDOWN.UseVisualStyleBackColor = false;
             this.btnSHUTDOWN.Click += new System.EventHandler(this.btnSHUTDOWN_Click);
-            // 
-            // labMsg
-            // 
-            this.labMsg.AutoEllipsis = true;
-            this.labMsg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.labMsg.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labMsg.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labMsg.Location = new System.Drawing.Point(0, 250);
-            this.labMsg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labMsg.Name = "labMsg";
-            this.labMsg.Size = new System.Drawing.Size(398, 31);
-            this.labMsg.TabIndex = 9;
             // 
             // btnLIST
             // 
@@ -182,12 +171,12 @@
             // 
             this.btnSHUTDOWN2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnSHUTDOWN2.Enabled = false;
-            this.btnSHUTDOWN2.Location = new System.Drawing.Point(4, 54);
+            this.btnSHUTDOWN2.Location = new System.Drawing.Point(6, 65);
             this.btnSHUTDOWN2.Margin = new System.Windows.Forms.Padding(2);
             this.btnSHUTDOWN2.Name = "btnSHUTDOWN2";
             this.btnSHUTDOWN2.Size = new System.Drawing.Size(161, 40);
             this.btnSHUTDOWN2.TabIndex = 10;
-            this.btnSHUTDOWN2.Text = "排程打卡+關機";
+            this.btnSHUTDOWN2.Text = "排程打卡";
             this.btnSHUTDOWN2.UseVisualStyleBackColor = false;
             this.btnSHUTDOWN2.EnabledChanged += new System.EventHandler(this.btnSHUTDOWN2_EnabledChanged);
             this.btnSHUTDOWN2.Click += new System.EventHandler(this.btnSHUTDOWN2_Click);
@@ -196,7 +185,7 @@
             // 
             this.dateTimePicker1.Checked = false;
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.Location = new System.Drawing.Point(4, 26);
+            this.dateTimePicker1.Location = new System.Drawing.Point(5, 14);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.ShowCheckBox = true;
@@ -208,7 +197,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.chkSHUTDOWN);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.btnSHUTDOWN2);
             this.groupBox1.Location = new System.Drawing.Point(209, 10);
@@ -220,16 +209,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "排程";
             // 
-            // label4
+            // chkSHUTDOWN
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(5, 97);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(8, 12);
-            this.label4.TabIndex = 16;
-            this.label4.Text = " ";
+            this.chkSHUTDOWN.AutoSize = true;
+            this.chkSHUTDOWN.Location = new System.Drawing.Point(9, 41);
+            this.chkSHUTDOWN.Name = "chkSHUTDOWN";
+            this.chkSHUTDOWN.Size = new System.Drawing.Size(48, 16);
+            this.chkSHUTDOWN.TabIndex = 11;
+            this.chkSHUTDOWN.Text = "關機";
+            this.chkSHUTDOWN.UseVisualStyleBackColor = true;
             // 
             // timer1
             // 
@@ -264,18 +252,30 @@
             // labNAME
             // 
             this.labNAME.AutoSize = true;
-            this.labNAME.Location = new System.Drawing.Point(20, 250);
+            this.labNAME.Location = new System.Drawing.Point(67, 238);
             this.labNAME.Name = "labNAME";
             this.labNAME.Size = new System.Drawing.Size(38, 12);
             this.labNAME.TabIndex = 103;
             this.labNAME.Text = "NAME";
             this.labNAME.Visible = false;
             // 
+            // lstMsg
+            // 
+            this.lstMsg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lstMsg.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lstMsg.FormattingEnabled = true;
+            this.lstMsg.ItemHeight = 12;
+            this.lstMsg.Location = new System.Drawing.Point(0, 251);
+            this.lstMsg.Name = "lstMsg";
+            this.lstMsg.Size = new System.Drawing.Size(398, 40);
+            this.lstMsg.TabIndex = 104;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 281);
+            this.ClientSize = new System.Drawing.Size(398, 291);
+            this.Controls.Add(this.lstMsg);
             this.Controls.Add(this.labNAME);
             this.Controls.Add(this.labTOKEN);
             this.Controls.Add(this.btnSYNC);
@@ -283,7 +283,6 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtPWD2);
             this.Controls.Add(this.btnLIST);
-            this.Controls.Add(this.labMsg);
             this.Controls.Add(this.btnSHUTDOWN);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMAIL);
@@ -316,7 +315,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMAIL;
         private System.Windows.Forms.Button btnSHUTDOWN;
-        private System.Windows.Forms.Label labMsg;
         private System.Windows.Forms.Button btnLIST;
         public System.Windows.Forms.TextBox txtPWD2;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -324,11 +322,12 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSYNC;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label labTOKEN;
         private System.Windows.Forms.Label labNAME;
+        private System.Windows.Forms.ListBox lstMsg;
+        private System.Windows.Forms.CheckBox chkSHUTDOWN;
 
     }
 }

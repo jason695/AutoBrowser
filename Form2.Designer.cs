@@ -87,12 +87,12 @@
             // 
             this.labID.AutoSize = true;
             this.labID.BackColor = System.Drawing.Color.Red;
-            this.labID.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labID.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labID.ForeColor = System.Drawing.Color.White;
             this.labID.Location = new System.Drawing.Point(33, 22);
             this.labID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labID.Name = "labID";
-            this.labID.Size = new System.Drawing.Size(50, 16);
+            this.labID.Size = new System.Drawing.Size(64, 21);
             this.labID.TabIndex = 3;
             this.labID.Text = "NONE";
             // 

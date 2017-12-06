@@ -50,7 +50,8 @@ namespace AutoBrowser
         {
             if (txtID.Text == "" || txtPWD2.Text == "")
             {
-                MessageBox.Show("帳密請勿空白!!");
+                msgBar("帳密請勿空白!!", 2);
+
                 return false;
             }else{
                 return true;
@@ -129,8 +130,10 @@ namespace AutoBrowser
 
                 System.Threading.Thread.Sleep(10000);
                
-                _IE.GoTo(@"http://sinocloud.sph/Main.aspx");             
-                _IE.Link(Find.ByUrl(new System.Text.RegularExpressions.Regex("打卡"))).Click();
+                _IE.GoTo(@"http://sinocloud.sph/Main.aspx");
+                _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
+                _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
+                _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
 
                 IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle(new System.Text.RegularExpressions.Regex("打卡")));
 
@@ -184,7 +187,7 @@ namespace AutoBrowser
                 return;
             }
             
-            if (labMsg.Text.IndexOf("失敗") == -1)
+            if (lstMsg.SelectedItem.ToString().IndexOf("失敗") == -1)
             {
                 System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\shutdown.exe", "-f -s -t 0");
             }
@@ -359,20 +362,25 @@ namespace AutoBrowser
             }
         }
 
-        //訊息欄控制(0:正常,非0:異常)
+        //訊息欄控制(0:正常,1:異常,2:彈跳訊息)
         public void msgBar(string msg, int clr = 0)
         {
             try
             {
                 if (clr == 0)
                 {
-                    labMsg.ForeColor = SystemColors.ControlText;    
+                    lstMsg.Items.Add(DateTime.Now.ToString() + "," + msg);    
                 }
-                else {
-                    labMsg.ForeColor = Color.Red; 
+                else if (clr == 1) {
+                    lstMsg.Items.Add("[ERROR]" + DateTime.Now.ToString() + "," + msg);
                 }
-
-                labMsg.Text = DateTime.Now.ToString() + "," + msg;                       
+                else if (clr == 2)
+                {
+                    lstMsg.Items.Add("[ALERT]" + DateTime.Now.ToString() + "," + msg);
+                    MessageBox.Show(msg,"ALERT");
+                }
+                
+                lstMsg.SelectedIndex = lstMsg.Items.Count - 1;
             }
             catch (Exception ex)
             {
@@ -416,8 +424,7 @@ namespace AutoBrowser
         private void btnSET_Click(object sender, EventArgs e)
         {
             setPARM();
-
-            MessageBox.Show("帳號、密碼、MAIL、排程時間預設值設定完成!!");
+            msgBar("本機帳號、密碼、MAIL、排程時間預設值設定完成!!",2);
         }
 
         //立即關機
@@ -441,7 +448,7 @@ namespace AutoBrowser
             txtPWD2.Text = AutoBrowser.Properties.Settings.Default.PWD;
         }
 
-        //排程關機
+        //排程打卡
         private void btnSHUTDOWN2_Click(object sender, EventArgs e)
         {
             DateTime dttx1 = DateTime.Parse(DateTime.Now.ToLongTimeString());
@@ -452,22 +459,27 @@ namespace AutoBrowser
 
             if (ts.TotalSeconds <= 0)
             {
-                MessageBox.Show("關機時間不得小於現在時間!!");
+                msgBar("關機時間不得小於現在時間!!",2);
             }
             else
             {
-                label4.Text = "設定完成!!";
+                if (chkSHUTDOWN.Checked == true)
+                {
+                    msgBar(btnSHUTDOWN2.Text.ToString() + "+" + chkSHUTDOWN.Text.ToString() +"設定完成!!");
+                } else {
+                    msgBar(btnSHUTDOWN2.Text.ToString() + "設定完成!!");
+                }
+                
                 timer1.Enabled = true;
             }
         }
-
+        
         //同步MONGO的資料下來
         private void btnSYNC_Click(object sender, EventArgs e)
         {
             if (cs.mongo_sync()==true)
             {
-                MessageBox.Show("SYNC OK!!");
-                msgBar("名單已同步...");
+                msgBar("名單已同步完成!!");
             }
                
         }
@@ -506,16 +518,12 @@ namespace AutoBrowser
         {
             if (dateTimePicker1.Checked == true)
             {
-                btnSHUTDOWN2.Enabled = true;
-                label4.Text = " ";
+                btnSHUTDOWN2.Enabled = true;               
             }
             else
             {
-                btnSHUTDOWN2.Enabled = false;
-                if (label4.Text != " ")
-                {
-                    label4.Text = "設定取消!!";
-                }
+                btnSHUTDOWN2.Enabled = false;                
+                msgBar("排程設定取消!!");                
                 timer1.Enabled = false;
             }
         }
@@ -543,7 +551,10 @@ namespace AutoBrowser
             {
                 timer1.Enabled = false;
                 card();
-                shutdown();
+                if (chkSHUTDOWN.Checked == true)
+                {
+                    shutdown();
+                }                
             }
         }
         #endregion
@@ -569,7 +580,7 @@ namespace AutoBrowser
            
             if (e.Error != null)
             {
-                MessageBox.Show(e.Error.Message);
+                MessageBox.Show(e.Error.Message); 
             }
             else
             {
@@ -580,13 +591,13 @@ namespace AutoBrowser
                 if (Convert.ToDateTime(e.Result.ToString()) > dt) //本機文字檔有更新
                 {
                     string str = "來源名單有更新，請同步!!";                    
-                    MessageBox.Show(str, "TopMostMessageBox");
-                    msgBar(str, 1);
+                    //MessageBox.Show(str, "TopMostMessageBox");
+                    msgBar(str, 2);
                 }                
             }
         }
         #endregion
-
+        
         //人工同步
         //private void btnSYNC_Click(object sender, EventArgs e)
         //{
