@@ -129,33 +129,40 @@ namespace AutoBrowser
                 _IE.Button(Find.ByName("btnLogin")).ClickNoWait();
 
                 System.Threading.Thread.Sleep(10000);
-               
-                _IE.GoTo(@"http://sinocloud.sph/Main.aspx");
-                _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
-                _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
-                _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
 
-                IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle(new System.Text.RegularExpressions.Regex("打卡")));
+                if (_IE.Title != "HOME")
+                {
+                    cs.wrLog("登入失敗", txtID.Text);
+                    msgBar("登入失敗!!", 1);
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "登入~~~失敗~~~!!");
+                }
+                else {
+                    //登入成功 
+                    _IE.GoTo(@"http://sinocloud.sph/Main.aspx");
+                    _IE.Link(Find.ByText(new System.Text.RegularExpressions.Regex("打卡"))).Click();
+      
+                    IE _NEWIE = IE.AttachTo<IE>(Find.ByTitle(new System.Text.RegularExpressions.Regex("打卡")));
 
-                //if (_NEWIE.Span(Find.ById("ResultMsg")).Text == "打卡成功")
-                if (_NEWIE.Title == "打卡完成")
-                {
-                    cs.wrLog("打卡成功", txtID.Text);
-                    msgBar("打卡成功!!");
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡完成!!");
-                    _IE.GoTo(@"http://sinocloud.sph/Login.aspx"); //登出   
-                }
-                else if (_NEWIE.Title == "打卡異常")
-                {
-                    cs.wrLog("打卡異常", txtID.Text);
-                    msgBar("打卡異常!!", 1);
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常(退勤打卡時間較正常下班(或值勤)時間晚15分鐘)");
-                }
-                else
-                {
-                    cs.wrLog("打卡失敗", txtID.Text);
-                    msgBar("打卡失敗!!", 1);
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡~~~失敗~~~!!");
+                    //if (_NEWIE.Span(Find.ById("ResultMsg")).Text == "打卡成功")
+                    if (_NEWIE.Title == "打卡完成")
+                    {
+                        cs.wrLog("打卡成功", txtID.Text);
+                        msgBar("打卡成功!!");
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡完成!!");
+                        _IE.GoTo(@"http://sinocloud.sph/Login.aspx"); //登出   
+                    }
+                    else if (_NEWIE.Title == "打卡異常")
+                    {
+                        cs.wrLog("打卡異常", txtID.Text);
+                        msgBar("打卡異常!!", 1);
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常(退勤打卡時間較正常下班(或值勤)時間晚15分鐘)");
+                    }
+                    else
+                    {
+                        cs.wrLog("打卡失敗", txtID.Text);
+                        msgBar("打卡失敗!!", 1);
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡~~~失敗~~~!!");
+                    }
                 }
 
                 prScrn();  
@@ -189,6 +196,7 @@ namespace AutoBrowser
             
             if (lstMsg.SelectedItem.ToString().IndexOf("失敗") == -1)
             {
+                sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "電腦關機!!");
                 System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\shutdown.exe", "-f -s -t 0");
             }
         }
