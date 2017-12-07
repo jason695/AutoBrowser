@@ -130,7 +130,7 @@ namespace AutoBrowser
 
                 System.Threading.Thread.Sleep(10000);
 
-                if (_IE.Title != "HOME")
+                if (_IE.Title != "Home")
                 {
                     cs.wrLog("登入失敗", txtID.Text);
                     msgBar("登入失敗!!", 1);
