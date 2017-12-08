@@ -48,6 +48,7 @@
             this.btnCLS2 = new System.Windows.Forms.Button();
             this.btnNEW = new System.Windows.Forms.Button();
             this.btnDEL = new System.Windows.Forms.Button();
+            this.btnForm3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -122,6 +123,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnForm3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -282,6 +284,16 @@
             this.btnDEL.UseVisualStyleBackColor = true;
             this.btnDEL.Click += new System.EventHandler(this.btnDEL_Click);
             // 
+            // btnForm3
+            // 
+            this.btnForm3.Location = new System.Drawing.Point(623, 51);
+            this.btnForm3.Name = "btnForm3";
+            this.btnForm3.Size = new System.Drawing.Size(75, 23);
+            this.btnForm3.TabIndex = 9;
+            this.btnForm3.Text = "推播管理";
+            this.btnForm3.UseVisualStyleBackColor = true;
+            this.btnForm3.Click += new System.EventHandler(this.btnForm3_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -291,7 +303,6 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Form2";
@@ -328,5 +339,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnDEL;
+        private System.Windows.Forms.Button btnForm3;
     }
 }

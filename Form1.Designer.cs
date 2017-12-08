@@ -38,7 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtMAIL = new System.Windows.Forms.TextBox();
             this.btnSHUTDOWN = new System.Windows.Forms.Button();
-            this.btnLIST = new System.Windows.Forms.Button();
+            this.btnForm2 = new System.Windows.Forms.Button();
             this.txtPWD2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnSHUTDOWN2 = new System.Windows.Forms.Button();
@@ -137,16 +137,16 @@
             this.btnSHUTDOWN.UseVisualStyleBackColor = false;
             this.btnSHUTDOWN.Click += new System.EventHandler(this.btnSHUTDOWN_Click);
             // 
-            // btnLIST
+            // btnForm2
             // 
-            this.btnLIST.Location = new System.Drawing.Point(20, 193);
-            this.btnLIST.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLIST.Name = "btnLIST";
-            this.btnLIST.Size = new System.Drawing.Size(77, 40);
-            this.btnLIST.TabIndex = 6;
-            this.btnLIST.Text = "名單維護";
-            this.btnLIST.UseVisualStyleBackColor = true;
-            this.btnLIST.Click += new System.EventHandler(this.btnLIST_Click);
+            this.btnForm2.Location = new System.Drawing.Point(20, 193);
+            this.btnForm2.Margin = new System.Windows.Forms.Padding(2);
+            this.btnForm2.Name = "btnForm2";
+            this.btnForm2.Size = new System.Drawing.Size(77, 40);
+            this.btnForm2.TabIndex = 6;
+            this.btnForm2.Text = "名單維護";
+            this.btnForm2.UseVisualStyleBackColor = true;
+            this.btnForm2.Click += new System.EventHandler(this.btnForm2_Click);
             // 
             // txtPWD2
             // 
@@ -282,7 +282,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtPWD2);
-            this.Controls.Add(this.btnLIST);
+            this.Controls.Add(this.btnForm2);
             this.Controls.Add(this.btnSHUTDOWN);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMAIL);
@@ -315,7 +315,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMAIL;
         private System.Windows.Forms.Button btnSHUTDOWN;
-        private System.Windows.Forms.Button btnLIST;
+        private System.Windows.Forms.Button btnForm2;
         public System.Windows.Forms.TextBox txtPWD2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btnSHUTDOWN2;

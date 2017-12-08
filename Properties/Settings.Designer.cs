@@ -71,15 +71,6 @@ namespace AutoBrowser.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\AutoBrowser_log\\\\list_p.txt")]
-        public string path_local {
-            get {
-                return ((string)(this["path_local"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("c:\\AutoBrowser_log\\")]
@@ -125,6 +116,15 @@ namespace AutoBrowser.Properties {
             }
             set {
                 this["NAME"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\AutoBrowser_log\\list_p.txt")]
+        public string path_local {
+            get {
+                return ((string)(this["path_local"]));
             }
         }
     }

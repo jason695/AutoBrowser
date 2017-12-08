@@ -180,6 +180,13 @@ namespace AutoBrowser
             txtMAIL.Text = "";
             txtNAME.Text = "";
         }
+
+        private void btnForm3_Click(object sender, EventArgs e)
+        {
+            Form3 frm = new Form3();
+            frm.ShowDialog(this);
+            frm.Dispose();
+        }
         
     }
 }

@@ -24,8 +24,8 @@ namespace AutoBrowser
         Class1 cs = new Class1();
         DataTable dt;
 
-        string path = "";  
-        string logDir = AutoBrowser.Properties.Settings.Default.logDir.ToString(); //截圖+LOG用
+        string txt_path = AutoBrowser.Properties.Settings.Default.path_local.ToString(); //list_p.txt
+        string log_path = AutoBrowser.Properties.Settings.Default.logDir.ToString(); //截圖+LOG用
 
         public Form1()
         {
@@ -204,23 +204,19 @@ namespace AutoBrowser
         //程式初始化
         public void load_ini()
         {
-            path = logDir;
-
             //建立目錄
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(log_path))
             {
-                DirectoryInfo di = Directory.CreateDirectory(path);
+                DirectoryInfo di = Directory.CreateDirectory(log_path);
             }
         }
         
         //下拉選單_啟動用,抓本機
         public void getData_ini()
         {
-            path = AutoBrowser.Properties.Settings.Default.path_local.ToString();
-
-            if (File.Exists(path) == true)
-            { 
-                dt = cs.CsvToDt(path, "DT", ",");
+            if (File.Exists(txt_path) == true)
+            {
+                dt = cs.CsvToDt(txt_path, "DT", ",");
 
                 comboBox1.Items.Clear();
                 comboBox1.Text = "請選擇";
@@ -355,13 +351,13 @@ namespace AutoBrowser
         public void prScrn(){
             try
             {
-                path = logDir;
+                //path = logDir;
                 String file = @"screen" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + txtID.Text.ToString() + ".jpg";
 
                 Bitmap myImage = new Bitmap(1920, 1080);
                 Graphics g = Graphics.FromImage(myImage);
                 g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(1920, 1080));
-                myImage.Save(path+file);
+                myImage.Save(log_path+file);
             }
             catch (Exception ex)
             {
@@ -446,7 +442,7 @@ namespace AutoBrowser
         }
 
         //名單維護
-        private void btnLIST_Click(object sender, EventArgs e)
+        private void btnForm2_Click(object sender, EventArgs e)
         {
             Form2 frm = new Form2();
             frm.ShowDialog(this);
@@ -592,8 +588,7 @@ namespace AutoBrowser
             }
             else
             {
-                path = AutoBrowser.Properties.Settings.Default.path_local.ToString();
-                DateTime dt = File.GetLastWriteTime(path);
+                DateTime dt = File.GetLastWriteTime(txt_path);
                 //MessageBox.Show(e.Result.ToString() + Environment.NewLine + dt.ToString(), "TopMostMessageBox");
                 
                 if (Convert.ToDateTime(e.Result.ToString()) > dt) //本機文字檔有更新
