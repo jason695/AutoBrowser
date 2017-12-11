@@ -241,7 +241,7 @@ namespace AutoBrowser
         }
 
         //寄MAIL
-        public void sendMail(){
+        public void sendMail(string email,string msg){
             try
             {
                 //------------SMTP--------------
@@ -302,17 +302,19 @@ namespace AutoBrowser
                 Outlook._MailItem oMsg = (Outlook.MailItem)oApp.CreateItem(Outlook.OlItemType.olMailItem);
 
                 // Set the subject.
-                oMsg.Subject = "AutoBrowser_LOG";
+                oMsg.Subject = "AutoBrowser";
 
                 // Set HTMLBody.
-                String sHtml;
-                sHtml = "";
-                oMsg.HTMLBody = sHtml;
+                //String sHtml;
+                //sHtml = "";
+                //oMsg.HTMLBody = sHtml;
+                oMsg.HTMLBody = msg;
 
                 // Add a recipient.
                 Outlook.Recipients oRecips = (Outlook.Recipients)oMsg.Recipients;
                 // TODO: Change the recipient in the next line if necessary.
-                Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(txtMAIL.Text.ToString());
+                //Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(txtMAIL.Text.ToString());
+                Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(email.ToString());
                 oRecip.Resolve();
 
                 // Send.
