@@ -155,13 +155,13 @@ namespace AutoBrowser
                     {
                         cs.wrLog("打卡異常", txtID.Text);
                         msgBar("打卡異常!!", 1);
-                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常(退勤打卡時間較正常下班(或值勤)時間晚15分鐘)");
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常[" + _NEWIE.Span(Find.ById("ShowMsg")).ToString() + "],請人工處理!!");
                     }
                     else
                     {
                         cs.wrLog("打卡失敗", txtID.Text);
                         msgBar("打卡失敗!!", 1);
-                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡~~~失敗~~~!!");
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡~~~失敗~~~!!(請查明原因)");
                     }
                 }
 

@@ -27,7 +27,7 @@ namespace AutoBrowser
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            txtMSG.Text= @"新版本("+ cs.getVer().ToString() + @")更新於\\10.11.36.201\e$\Howard\exe\目錄下";            
+            txtMSG.Text = @"已提供新版本下載(" + cs.getVer().ToString() + @")，路徑:\\10.11.36.201\e$\Howard\exe\";            
         }
 
         private void button1_Click(object sender, EventArgs e)
