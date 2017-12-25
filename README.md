@@ -101,5 +101,7 @@ net use \\@remoteHost @passWord /user:@userName
 
 ## @20171206 (V2.4.5.8)		
 * 1)排程打卡
-* 2)登入錯誤處理
+* 2)登入異常/錯誤處理
 * 3)新增推播通知
+* 4)更新WEB SERVICE網址(http://35.189.190.46/LINENOTIFY/WS.asmx)
+* 5)新增ICON

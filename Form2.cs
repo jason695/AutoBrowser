@@ -197,6 +197,11 @@ namespace AutoBrowser
         {
             System.Diagnostics.Process.Start(@"https://github.com/jason695/AutoBrowser");
         }
+
+        private void 版本ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://github.com/jason695/AutoBrowser/blob/master1/README.md");
+        }
         
     }
 }

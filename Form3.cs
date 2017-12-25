@@ -27,7 +27,7 @@ namespace AutoBrowser
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            txtMSG.Text = @"已提供新版本下載(" + cs.getVer().ToString() + @")，路徑:\\10.11.36.201\e$\Howard\exe\";            
+            txtMSG.Text = @"["+ DateTime.Today.ToString("yyyy-MM-dd") +"]" + Environment.NewLine + "已提供新版本下載(" + cs.getVer().ToString() + @")，路徑:\\10.11.36.201\e$\Howard\exe\";            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,6 +41,7 @@ namespace AutoBrowser
                     frm1.sendLine(row["TOKEN"].ToString(),txtMSG.Text.ToString());
                 }   
             }
+            MessageBox.Show("LINE推播完成");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -55,6 +56,7 @@ namespace AutoBrowser
                     frm1.sendMail(row["MAIL"].ToString(), txtMSG.Text.ToString());
                 }
             }
+            MessageBox.Show("MAIL推播完成");
         }        
     }
 }

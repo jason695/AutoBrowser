@@ -51,10 +51,11 @@
             this.btnDEL = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.進階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.推播管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.取得TOKENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gITHUBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.版本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -309,21 +310,22 @@
             this.進階ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.進階ToolStripMenuItem.Text = "進階";
             // 
+            // 推播管理ToolStripMenuItem
+            // 
+            this.推播管理ToolStripMenuItem.Name = "推播管理ToolStripMenuItem";
+            this.推播管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.推播管理ToolStripMenuItem.Text = "推播管理";
+            this.推播管理ToolStripMenuItem.Click += new System.EventHandler(this.推播管理ToolStripMenuItem_Click);
+            // 
             // 說明ToolStripMenuItem
             // 
             this.說明ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.取得TOKENToolStripMenuItem,
-            this.gITHUBToolStripMenuItem});
+            this.gITHUBToolStripMenuItem,
+            this.版本ToolStripMenuItem});
             this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
             this.說明ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.說明ToolStripMenuItem.Text = "說明";
-            // 
-            // 推播管理ToolStripMenuItem
-            // 
-            this.推播管理ToolStripMenuItem.Name = "推播管理ToolStripMenuItem";
-            this.推播管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.推播管理ToolStripMenuItem.Text = "推播管理";
-            this.推播管理ToolStripMenuItem.Click += new System.EventHandler(this.推播管理ToolStripMenuItem_Click);
             // 
             // 取得TOKENToolStripMenuItem
             // 
@@ -338,6 +340,13 @@
             this.gITHUBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gITHUBToolStripMenuItem.Text = "GITHUB";
             this.gITHUBToolStripMenuItem.Click += new System.EventHandler(this.gITHUBToolStripMenuItem_Click);
+            // 
+            // 版本ToolStripMenuItem
+            // 
+            this.版本ToolStripMenuItem.Name = "版本ToolStripMenuItem";
+            this.版本ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.版本ToolStripMenuItem.Text = "版本";
+            this.版本ToolStripMenuItem.Click += new System.EventHandler(this.版本ToolStripMenuItem_Click);
             // 
             // Form2
             // 
@@ -396,5 +405,6 @@
         private System.Windows.Forms.ToolStripMenuItem 說明ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 取得TOKENToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gITHUBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 版本ToolStripMenuItem;
     }
 }
