@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://35.189.190.46/WS.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://35.189.190.46/LINENOTIFY/WS.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WS.disco" MetadataType="Disco" ID="8db25174-a4fd-4161-b96a-2e204b886983" SourceId="1" SourceUrl="http://35.189.190.46/WS.asmx?disco" />
-    <MetadataFile FileName="WS.wsdl" MetadataType="Wsdl" ID="957ca538-f060-4eb7-8d01-948676b51d30" SourceId="1" SourceUrl="http://35.189.190.46/WS.asmx?wsdl" />
+    <MetadataFile FileName="WS1.wsdl" MetadataType="Wsdl" ID="5209b367-e8fc-43ca-8491-17e947bf4b45" SourceId="1" SourceUrl="http://35.189.190.46/LINENOTIFY/WS.asmx?wsdl" />
+    <MetadataFile FileName="WS1.disco" MetadataType="Disco" ID="1996dc46-15a8-428d-945a-793321b4386b" SourceId="1" SourceUrl="http://35.189.190.46/LINENOTIFY/WS.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtPWD1 = new System.Windows.Forms.TextBox();
             this.txtPWD2 = new System.Windows.Forms.TextBox();
@@ -48,10 +49,16 @@
             this.btnCLS2 = new System.Windows.Forms.Button();
             this.btnNEW = new System.Windows.Forms.Button();
             this.btnDEL = new System.Windows.Forms.Button();
-            this.btnForm3 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.進階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.推播管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.取得TOKENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gITHUBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -59,11 +66,11 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(33, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(33, 24);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(665, 321);
+            this.dataGridView1.Size = new System.Drawing.Size(665, 297);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
@@ -88,12 +95,12 @@
             // 
             this.labID.AutoSize = true;
             this.labID.BackColor = System.Drawing.Color.Red;
-            this.labID.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labID.Font = new System.Drawing.Font("新細明體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labID.ForeColor = System.Drawing.Color.White;
             this.labID.Location = new System.Drawing.Point(33, 22);
             this.labID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labID.Name = "labID";
-            this.labID.Size = new System.Drawing.Size(64, 21);
+            this.labID.Size = new System.Drawing.Size(107, 35);
             this.labID.TabIndex = 3;
             this.labID.Text = "NONE";
             // 
@@ -123,7 +130,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnForm3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -275,24 +281,63 @@
             // 
             this.btnDEL.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnDEL.Enabled = false;
-            this.btnDEL.Location = new System.Drawing.Point(0, 0);
+            this.btnDEL.Location = new System.Drawing.Point(0, 24);
             this.btnDEL.Margin = new System.Windows.Forms.Padding(2);
             this.btnDEL.Name = "btnDEL";
-            this.btnDEL.Size = new System.Drawing.Size(32, 321);
+            this.btnDEL.Size = new System.Drawing.Size(32, 297);
             this.btnDEL.TabIndex = 21;
             this.btnDEL.Text = "刪";
             this.btnDEL.UseVisualStyleBackColor = true;
             this.btnDEL.Click += new System.EventHandler(this.btnDEL_Click);
             // 
-            // btnForm3
+            // menuStrip1
             // 
-            this.btnForm3.Location = new System.Drawing.Point(623, 51);
-            this.btnForm3.Name = "btnForm3";
-            this.btnForm3.Size = new System.Drawing.Size(75, 23);
-            this.btnForm3.TabIndex = 9;
-            this.btnForm3.Text = "推播管理";
-            this.btnForm3.UseVisualStyleBackColor = true;
-            this.btnForm3.Click += new System.EventHandler(this.btnForm3_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.進階ToolStripMenuItem,
+            this.說明ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(698, 24);
+            this.menuStrip1.TabIndex = 22;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 進階ToolStripMenuItem
+            // 
+            this.進階ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.推播管理ToolStripMenuItem});
+            this.進階ToolStripMenuItem.Name = "進階ToolStripMenuItem";
+            this.進階ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.進階ToolStripMenuItem.Text = "進階";
+            // 
+            // 說明ToolStripMenuItem
+            // 
+            this.說明ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.取得TOKENToolStripMenuItem,
+            this.gITHUBToolStripMenuItem});
+            this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
+            this.說明ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.說明ToolStripMenuItem.Text = "說明";
+            // 
+            // 推播管理ToolStripMenuItem
+            // 
+            this.推播管理ToolStripMenuItem.Name = "推播管理ToolStripMenuItem";
+            this.推播管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.推播管理ToolStripMenuItem.Text = "推播管理";
+            this.推播管理ToolStripMenuItem.Click += new System.EventHandler(this.推播管理ToolStripMenuItem_Click);
+            // 
+            // 取得TOKENToolStripMenuItem
+            // 
+            this.取得TOKENToolStripMenuItem.Name = "取得TOKENToolStripMenuItem";
+            this.取得TOKENToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.取得TOKENToolStripMenuItem.Text = "LINE TOKEN";
+            this.取得TOKENToolStripMenuItem.Click += new System.EventHandler(this.取得TOKENToolStripMenuItem_Click);
+            // 
+            // gITHUBToolStripMenuItem
+            // 
+            this.gITHUBToolStripMenuItem.Name = "gITHUBToolStripMenuItem";
+            this.gITHUBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gITHUBToolStripMenuItem.Text = "GITHUB";
+            this.gITHUBToolStripMenuItem.Click += new System.EventHandler(this.gITHUBToolStripMenuItem_Click);
             // 
             // Form2
             // 
@@ -303,6 +348,9 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Form2";
@@ -313,7 +361,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -339,6 +390,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnDEL;
-        private System.Windows.Forms.Button btnForm3;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 進階ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 推播管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 說明ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 取得TOKENToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gITHUBToolStripMenuItem;
     }
 }

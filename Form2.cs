@@ -181,11 +181,21 @@ namespace AutoBrowser
             txtNAME.Text = "";
         }
 
-        private void btnForm3_Click(object sender, EventArgs e)
+        private void 推播管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form3 frm = new Form3();
             frm.ShowDialog(this);
             frm.Dispose();
+        }
+
+        private void 取得TOKENToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://github.com/jason695/AutoBrowser/blob/master1/doc/%E6%94%AF%E6%8F%B4LINE%E9%80%9A%E7%9F%A5.docx");
+        }
+
+        private void gITHUBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://github.com/jason695/AutoBrowser");
         }
         
     }

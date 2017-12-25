@@ -98,3 +98,8 @@ net use \\@remoteHost @passWord /user:@userName
 
 ## @20171128 (V2.4.5.7)		
 * 1)新增LINE NOTIFY通知功能,相關說明請參考:支援LINE通知.docx
+
+## @20171206 (V2.4.5.8)		
+* 1)排程打卡
+* 2)登入錯誤處理
+* 3)新增推播通知

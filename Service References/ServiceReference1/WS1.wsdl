@@ -57,10 +57,10 @@
   </wsdl:binding>
   <wsdl:service name="WS">
     <wsdl:port name="WSSoap" binding="tns:WSSoap">
-      <soap:address location="http://35.189.190.46/WS.asmx" />
+      <soap:address location="http://35.189.190.46/LINENOTIFY/WS.asmx" />
     </wsdl:port>
     <wsdl:port name="WSSoap12" binding="tns:WSSoap12">
-      <soap12:address location="http://35.189.190.46/WS.asmx" />
+      <soap12:address location="http://35.189.190.46/LINENOTIFY/WS.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

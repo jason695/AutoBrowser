@@ -39,6 +39,9 @@
   <PropertyGroup>
     <StartupObject>AutoBrowser.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Tatice-Cristal-Intense-Internet-Explorer.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -170,7 +173,7 @@
     <None Include="Service References\ServiceReference1\AutoBrowser.ServiceReference1.SendResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\WS.wsdl" />
+    <None Include="Service References\ServiceReference1\WS1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -231,13 +234,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference1\WS.disco" />
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference1\configuration.svcinfo" />
     <None Include="Service References\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceReference1\WS1.disco" />
+    <Content Include="Tatice-Cristal-Intense-Internet-Explorer.ico" />
     <Content Include="txt\list_p.txt" />
   </ItemGroup>
   <ItemGroup>
