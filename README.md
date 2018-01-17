@@ -80,7 +80,10 @@ net use \\@remoteHost @passWord /user:@userName
 	* * mongo 10.11.9.191:27017
 	* * use AutoBrowser
 	* * db.Products.find();
-	* * db.Products_log.find();
+	* * db.Products_LOG.find();
+
+* 4)匯出
+	mongoexport --host 10.11.34.59 -d AutoBrowser -c Products_LOG -o output.json
 	
 ## @20170918 (V2.4.5.3)		
 * 1)加入新mongo主機

@@ -121,7 +121,7 @@ namespace AutoBrowser
                 }
 
                 _IE = new IE();
-                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.ShowNormal);
+                _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
 
                 _IE.GoTo(@"http://sinocloud.sph/Login.aspx");
                 _IE.TextField(Find.ById("txtUserID_txtData")).TypeText(txtID.Text);

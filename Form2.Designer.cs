@@ -330,21 +330,21 @@
             // 取得TOKENToolStripMenuItem
             // 
             this.取得TOKENToolStripMenuItem.Name = "取得TOKENToolStripMenuItem";
-            this.取得TOKENToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.取得TOKENToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.取得TOKENToolStripMenuItem.Text = "LINE TOKEN";
             this.取得TOKENToolStripMenuItem.Click += new System.EventHandler(this.取得TOKENToolStripMenuItem_Click);
             // 
             // gITHUBToolStripMenuItem
             // 
             this.gITHUBToolStripMenuItem.Name = "gITHUBToolStripMenuItem";
-            this.gITHUBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gITHUBToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.gITHUBToolStripMenuItem.Text = "GITHUB";
             this.gITHUBToolStripMenuItem.Click += new System.EventHandler(this.gITHUBToolStripMenuItem_Click);
             // 
             // 版本ToolStripMenuItem
             // 
             this.版本ToolStripMenuItem.Name = "版本ToolStripMenuItem";
-            this.版本ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.版本ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.版本ToolStripMenuItem.Text = "版本";
             this.版本ToolStripMenuItem.Click += new System.EventHandler(this.版本ToolStripMenuItem_Click);
             // 
@@ -358,6 +358,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);

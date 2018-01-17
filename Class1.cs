@@ -473,7 +473,6 @@ namespace AutoBrowser
                 //MongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products"); // 取得 Collection
                 //-----改寫舊語法 END------
                 IMongoCollection<MongoProduct> _Products = myDB.GetCollection<MongoProduct>("Products");
-
                 var newProduct = new MongoProduct();
                 newProduct.txt = arrText;
                 newProduct.ip = getIP().ToString();
@@ -485,7 +484,6 @@ namespace AutoBrowser
                 //-----改寫舊語法 END------
                 myDB.DropCollection("Products");                
                 _Products.InsertOne(newProduct);
-
 
                 //類LOG,不TRUNCATE
                 IMongoCollection<MongoProduct> _Products_log = myDB.GetCollection<MongoProduct>("Products_LOG"); // 取得 Collection
@@ -501,8 +499,6 @@ namespace AutoBrowser
                 wrLog(ex.ToString(), "mongo_upload");
                 throw ex;
             }
-            
-            
         }
         #endregion
         
