@@ -25,6 +25,9 @@ namespace AutoBrowser
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            //先同步
+            cs.mongo_sync();
+
             dt = cs.CsvToDt(path, "tmp", ",");
             dataGridView1.DataSource = dt;
 

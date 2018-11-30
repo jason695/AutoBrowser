@@ -44,75 +44,12 @@ namespace AutoBrowser
             backgroundWorker1.RunWorkerAsync(); 
         }
 
-        #region ---FUNCTION---
-        //欄位CHECK
-        public Boolean dataCheck()
-        {
-            if (txtID.Text == "" || txtPWD2.Text == "")
-            {
-                msgBar("帳密請勿空白!!", 2);
-
-                return false;
-            }else{
-                return true;
-            }     
-        }
-
-        //打卡_舊版
-        //public void card_OLD()
-        //{
-        //    try
-        //    {
-        //        if (dataCheck() == false)
-        //        {
-        //            return;
-        //        }
-                        
-        //        _IE = new IE();
-        //        _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
-
-        //        //------------測試網頁--------------
-        //        //_IE.GoTo(@"C:\inetpub\wwwroot\test_err.htm");
-        //        //_IE.GoTo(@"C:\inetpub\wwwroot\test.htm");
-        //        //_IE.TextField(Find.ByName("TextBox1")).TypeText(textBox1.Text);
-        //        //_IE.Button(Find.ByName("Button1")).Click();
-
-        //        _IE.GoTo("http://signio.bsp/");
-        //        _IE.TextField(Find.ByName("txtUserId")).TypeText(txtID.Text);
-        //        _IE.TextField(Find.ByName("txtPassword")).TypeText(cs.getDES(txtPWD2.Text));
-        //        _IE.Button(Find.ByName("btnSignIn")).Click();
-
-        //        _IE.WaitForComplete(2);
-
-        //        if (_IE.Image(Find.ById("imgNo")).Exists)
-        //        {
-        //            cs.wrLog("LOG失敗", txtID.Text);
-
-        //            labMsg.ForeColor = Color.Red;
-        //            labMsg.Text = DateTime.Now.ToString() + "失敗!";
-        //        }
-        //        else
-        //        {
-        //            //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
-        //            cs.wrLog("LOG成功", txtID.Text);
-        //            prScrn();
-
-        //            _IE.Close();
-
-        //            labMsg.ForeColor = SystemColors.ControlText;
-        //            labMsg.Text = DateTime.Now.ToString() + "送出!";                    
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        cs.wrLog(ex.ToString(), txtID.Text);
-        //        //throw;
-        //        return;
-        //    }
-        //}
-
+        #region ---SUB/FUN---
+        //打卡主程式
         public void card()
         {
+            string msg = "";
+            
             try
             {
                 if (dataCheck() == false)
@@ -128,13 +65,15 @@ namespace AutoBrowser
                 _IE.TextField(Find.ById("txtPassword_txtData")).TypeText(cs.getDES(txtPWD2.Text));
                 _IE.Button(Find.ByName("btnLogin")).ClickNoWait();
 
-                System.Threading.Thread.Sleep(10000);
+                System.Threading.Thread.Sleep(3000); //等待程式執行完成
 
                 if (_IE.Title != "Home")
                 {
-                    cs.wrLog("登入失敗", txtID.Text);
-                    msgBar("登入失敗!!", 1);
-                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "登入~~~失敗~~~!!");
+                    msg = "登入失敗";
+                    
+                    cs.wrLog(msg, txtID.Text);
+                    msgBar(msg, 1);
+                    sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + msg);
                 }
                 else {
                     //登入成功 
@@ -146,28 +85,55 @@ namespace AutoBrowser
                     //if (_NEWIE.Span(Find.ById("ResultMsg")).Text == "打卡成功")
                     if (_NEWIE.Title == "打卡完成")
                     {
-                        cs.wrLog("打卡成功", txtID.Text);
-                        msgBar("打卡成功!!");
-                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡完成!!");
+                        msg = "打卡成功";
+
+                        cs.wrLog(msg, txtID.Text);
+                        msgBar(msg);
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + msg);
                         _IE.GoTo(@"http://sinocloud.sph/Login.aspx"); //登出   
                     }
                     else if (_NEWIE.Title == "打卡異常")
                     {
-                        cs.wrLog("打卡異常", txtID.Text);
-                        msgBar("打卡異常!!", 1);
-                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常[" + _NEWIE.Span(Find.ById("ShowMsg")).ToString() + "],請人工處理!!");
+                        //異常處理(超時or提前15分),預設選下拉選單的第一個
+                        _NEWIE.SelectList(Find.ById("ddlAbnormalReason")).SelectByValue("11");
+
+                        //CLICK"確定"
+                        _NEWIE.Button(Find.ById("btnDefine")).Click();
+
+                        IE _NEWIE1 = IE.AttachTo<IE>(Find.ByTitle(new System.Text.RegularExpressions.Regex("打卡")));
+
+                        if (_NEWIE1.Title == "打卡完成")
+                        {
+                            msg = "打卡(超過時間)成功";
+
+                            cs.wrLog(msg, txtID.Text);
+                            msgBar(msg);
+                            sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + msg);
+                        }
+                        else
+                        {
+                            msg = "打卡異常";
+
+                            cs.wrLog(msg, txtID.Text);
+                            msgBar(msg,1);
+                            sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡異常[" + _NEWIE.Span(Find.ById("ShowMsg")).ToString() + "],請人工處理!!");
+                        }                        
                     }
                     else
                     {
-                        cs.wrLog("打卡失敗", txtID.Text);
-                        msgBar("打卡失敗!!", 1);
-                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "打卡~~~失敗~~~!!(請查明原因)");
+                        msg = "打卡失敗";
+
+                        cs.wrLog(msg, txtID.Text);
+                        msgBar(msg, 1);
+                        sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + msg +"(請查明原因)");
                     }
                 }
 
-                prScrn();  
                 _IE.Close();
 
+                //System.Threading.Thread.Sleep(1000); //等待程式執行完成
+                prScrn();  
+                
                 //////
                 //IE ie = new IE("http://localhost/Test/");
                 //点击按钮，打开新窗口test2
@@ -186,19 +152,42 @@ namespace AutoBrowser
             }
         }
 
-        //關機
-        public void shutdown()
+        //欄位CHECK
+        public Boolean dataCheck()
+        {
+            if (txtID.Text == "" || txtPWD2.Text == "")
+            {
+                msgBar("帳密請勿空白!!", 2);
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 關機
+        /// </summary>
+        /// <param name="flg">true:強制; false:有失敗則不關機</param>
+        public void shutdown(Boolean flg = false)
         {
             if (dataCheck() == false)
             {
                 return;
             }
-            
-            if (lstMsg.SelectedItem.ToString().IndexOf("失敗") == -1)
+
+            if (flg == false)
             {
-                sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "電腦關機!!");
-                System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\shutdown.exe", "-f -s -t 0");
-            }
+                if (lstMsg.SelectedItem.ToString().IndexOf("失敗") > 0)
+                {
+                    return;
+                }
+            }   
+
+            sendLine(labTOKEN.Text.ToString(), txtID.Text.ToString() + "-" + labNAME.Text.ToString() + "電腦關機!!");
+            System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\shutdown.exe", "-f -s -t 0");            
         }
         
         //程式初始化
@@ -339,13 +328,26 @@ namespace AutoBrowser
         }
 
         //呼叫WEB SERVICE,送訊息到LINE NOTIFY
+        //-> 改寫為WEB API
         public void sendLine(string token,string msg)
         {
             if (token != "")
             {
                 string result = null;
-                ServiceReference1.WSSoapClient ws = new ServiceReference1.WSSoapClient();
-                result = ws.Send(token, msg);
+
+                try
+                {
+                    //***web service***
+                    //ServiceReference1.WSSoapClient ws = new ServiceReference1.WSSoapClient();
+                    //result = ws.Send(token, msg);
+
+                    //***web api***
+                    result = "";
+                }
+                catch (Exception)
+                {
+                    sendMail(txtMAIL.Text.ToString(),"LINE通知功能異常,改用EMAIL通知");                    
+                }                
             }
         }
 
@@ -368,7 +370,11 @@ namespace AutoBrowser
             }
         }
 
-        //訊息欄控制(0:正常,1:異常,2:彈跳訊息)
+        /// <summary>
+        /// 訊息欄控制
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="clr">0:正常,1:異常,2:彈跳訊息</param>
         public void msgBar(string msg, int clr = 0)
         {
             try
@@ -559,7 +565,7 @@ namespace AutoBrowser
                 card();
                 if (chkSHUTDOWN.Checked == true)
                 {
-                    shutdown();
+                    shutdown(true); //強制關機,不管有沒有打成功
                 }                
             }
         }
@@ -602,7 +608,60 @@ namespace AutoBrowser
             }
         }
         #endregion
-        
+
+        //打卡_舊版
+        //public void card_OLD()
+        //{
+        //    try
+        //    {
+        //        if (dataCheck() == false)
+        //        {
+        //            return;
+        //        }
+
+        //        _IE = new IE();
+        //        _IE.ShowWindow(WatiN.Core.Native.Windows.NativeMethods.WindowShowStyle.Maximize);
+
+        //        //------------測試網頁--------------
+        //        //_IE.GoTo(@"C:\inetpub\wwwroot\test_err.htm");
+        //        //_IE.GoTo(@"C:\inetpub\wwwroot\test.htm");
+        //        //_IE.TextField(Find.ByName("TextBox1")).TypeText(textBox1.Text);
+        //        //_IE.Button(Find.ByName("Button1")).Click();
+
+        //        _IE.GoTo("http://signio.bsp/");
+        //        _IE.TextField(Find.ByName("txtUserId")).TypeText(txtID.Text);
+        //        _IE.TextField(Find.ByName("txtPassword")).TypeText(cs.getDES(txtPWD2.Text));
+        //        _IE.Button(Find.ByName("btnSignIn")).Click();
+
+        //        _IE.WaitForComplete(2);
+
+        //        if (_IE.Image(Find.ById("imgNo")).Exists)
+        //        {
+        //            cs.wrLog("LOG失敗", txtID.Text);
+
+        //            labMsg.ForeColor = Color.Red;
+        //            labMsg.Text = DateTime.Now.ToString() + "失敗!";
+        //        }
+        //        else
+        //        {
+        //            //sendMail();   //OULOOK會擋呼叫寄信功能,先移除"排程"和"關機"
+        //            cs.wrLog("LOG成功", txtID.Text);
+        //            prScrn();
+
+        //            _IE.Close();
+
+        //            labMsg.ForeColor = SystemColors.ControlText;
+        //            labMsg.Text = DateTime.Now.ToString() + "送出!";                    
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        cs.wrLog(ex.ToString(), txtID.Text);
+        //        //throw;
+        //        return;
+        //    }
+        //}
+
         //人工同步
         //private void btnSYNC_Click(object sender, EventArgs e)
         //{
