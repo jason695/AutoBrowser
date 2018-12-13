@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatiN.Core;
-using System.Net.Mail;
 using System.IO;
-using System.Xml;
-using System.Data.SqlClient;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Net;
+
+//using System.Data.SqlClient; // 改用MONGO
+//using System.Xml;
+//using System.Net.Mail; // 改用OUTLOOK
 //using System.Diagnostics;     // to use Missing.Value
 
 namespace AutoBrowser
@@ -327,7 +329,7 @@ namespace AutoBrowser
             }
         }
 
-        //呼叫WEB SERVICE,送訊息到LINE NOTIFY
+        //執行打卡,呼叫WEB SERVICE,送訊息到LINE NOTIFY
         //-> 改寫為WEB API
         public void sendLine(string token,string msg)
         {
@@ -342,7 +344,18 @@ namespace AutoBrowser
                     //result = ws.Send(token, msg);
 
                     //***web api***
-                    result = "";
+                    // 建立 webclient(GET)
+                    using (WebClient webClient = new WebClient())
+                    {
+                        // 指定 WebClient 的編碼
+                        webClient.Encoding = Encoding.UTF8;
+                        // 指定 WebClient 的 Content-Type header
+                        webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                        // 網址
+                        string url = "http://localhost:61103/api/line/" + token + "/" + msg;
+                        // 從網路 url 上取得資料
+                        result = webClient.DownloadString(url);                    
+                    }
                 }
                 catch (Exception)
                 {
@@ -609,7 +622,7 @@ namespace AutoBrowser
         }
         #endregion
 
-        //打卡_舊版
+        #region ---打卡_舊版---
         //public void card_OLD()
         //{
         //    try
@@ -681,7 +694,7 @@ namespace AutoBrowser
         //            else {
         //                str += "遠端2連線失敗" + Environment.NewLine;                    
         //            }
-                   
+
         //            File.Copy(AutoBrowser.Properties.Settings.Default.path2.ToString()
         //                    , AutoBrowser.Properties.Settings.Default.path_local.ToString(), true);
 
@@ -711,6 +724,7 @@ namespace AutoBrowser
         //        MessageBox.Show(str);
         //    }
         //}
-
+        #endregion
+        
     }
 }
