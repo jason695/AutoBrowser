@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatiN.Core;
+using WatiN.Core.DialogHandlers;
 using System.IO;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Runtime.InteropServices;
@@ -67,7 +68,26 @@ namespace AutoBrowser
                 _IE.TextField(Find.ById("txtPassword_txtData")).TypeText(cs.getDES(txtPWD2.Text));
                 _IE.Button(Find.ByName("btnLogin")).ClickNoWait();
 
-                System.Threading.Thread.Sleep(3000); //等待程式執行完成
+                System.Threading.Thread.Sleep(1500); //等待程式執行完成
+
+                //跑過ALERT --start--
+                AlertDialogHandler AlertDialog = new AlertDialogHandler();
+               
+                //Code for checking if the case number is invalid and a dialog box appears.
+                Settings.AutoStartDialogWatcher = true;
+                Settings.AutoCloseDialogs = true;
+                _IE.AddDialogHandler(AlertDialog);
+              
+                //If alert dialog is found then close the dialog and log error
+                if (AlertDialog.Exists())
+                {
+                    AlertDialog.WaitUntilExists();
+                    //Click OK button of the dialog so that dialog gets closed
+                    AlertDialog.OKButton.Click();
+                    _IE.WaitForComplete();
+                    _IE.RemoveDialogHandler(AlertDialog);
+                }
+                //跑過ALERT --end--
 
                 if (_IE.Title != "Home")
                 {
