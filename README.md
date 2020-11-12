@@ -9,9 +9,9 @@ Welcome to the AutoBrowser wiki!
 ## @20170201 (V2.4.3)
 * 1.在啟動時,取回檔案至本機(注意效能問題)
 * 2.下拉選單的讀檔順序為: 遠端1 > 遠端2 > 本機
-  ** 遠端1:\\10.11.22.51\d$\113720\list_p.txt --> path1
-  ** 遠端2:\\10.11.34.172\c$\list_p.txt --> path2
-  ** 本機:C:\\AutoBrowser_log\\list_p.txt --> path3
+  * 遠端1:\\10.11.22.51\d$\113720\list_p.txt --> path1
+  * 遠端2:\\10.11.34.172\c$\list_p.txt --> path2
+  * 本機:C:\\AutoBrowser_log\\list_p.txt --> path3
 
 ## @20170201 (V2.4.4)
 * 1.加快開啟速度,連線磁碟改非同步
@@ -24,9 +24,9 @@ Welcome to the AutoBrowser wiki!
 * 1.加入github (https://github.com/jason695/AutoBrowser.git)
 * 2.名單檔同步機制.jpg
 帳密會儲存地點、取用的優先順序如下
-	* * 1.使用遠端1連線 --> "10.11.34.172"
-	* * 2.使用遠端2連線 --> "10.11.22.51"
-	* * 3.使用本機連線
+	* 1.使用遠端1連線 --> "10.11.34.172"
+	* 2.使用遠端2連線 --> "10.11.22.51"
+	* 3.使用本機連線
 
 指令為:
 net use \\@remoteHost @passWord /user:@userName
@@ -39,8 +39,8 @@ net use \\@remoteHost @passWord /user:@userName
 
 ## @20170622 (V2.4.5.1)
 * 1.使用MONGODB同步,安裝於
-	* * 10.11.9.191 (win2008)
-	* * 10.11.42.37 (win2008)
+	* 10.11.9.191 (win2008)
+	* 10.11.42.37 (win2008)
 
 * 2.相關設定
 	--環境變數path新增
@@ -68,19 +68,19 @@ net use \\@remoteHost @passWord /user:@userName
 
 ## @20170712 (V2.4.5.2)
 * 1.加入MONGODB名單更新通知
-	* * mongo 10.11.9.191:27017
-	* * mongo 10.11.42.37:27017
-	* * mongo 10.11.34.59:27017
-	* * Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017
+	* mongo 10.11.9.191:27017
+	* mongo 10.11.42.37:27017
+	* mongo 10.11.34.59:27017
+	* Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017
 * 2.DB資訊
-	* * db: AutoBrowser
-	* * collection: Products
-	* * column: txt,ip,dtime
+	* db: AutoBrowser
+	* collection: Products
+	* column: txt,ip,dtime
 * 3.語法
-	* * mongo 10.11.9.191:27017
-	* * use AutoBrowser
-	* * db.Products.find();
-	* * db.Products_LOG.find();
+	* mongo 10.11.9.191:27017
+	* use AutoBrowser
+	* db.Products.find();
+	* db.Products_LOG.find();
 
 * 4.匯出
 	
@@ -118,16 +118,16 @@ net use \\@remoteHost @passWord /user:@userName
 
 ## @20191005 (V2.4.6.0)
 * 1.新增10.11.34.172，移除10.11.42.37
-    ** mongo 10.11.9.191:27017
-    ** mongo 10.11.34.59:27017
-    ** mongo 10.11.34.172:27017
+    * mongo 10.11.9.191:27017
+    * mongo 10.11.34.59:27017
+    * mongo 10.11.34.172:27017
 
 ## @20200724 (V2.4.6.0)
 * 1.登入後遇到ALERT視窗,可以按確定跳過
 
 ## @20201112 (V2.4.6.0)
 * 1.新增10.11.34.172，移除10.11.9.191
-    ** mongo 10.11.34.59:27017
-    ** mongo 10.11.34.172:27017
-    ** mongo 10.11.36.192:27017
-    ** 連線語法: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
+    * mongo 10.11.34.59:27017
+    * mongo 10.11.34.172:27017
+    * mongo 10.11.36.192:27017
+    * 連線語法: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
