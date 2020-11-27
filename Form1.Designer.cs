@@ -52,6 +52,7 @@
             this.labTOKEN = new System.Windows.Forms.Label();
             this.labNAME = new System.Windows.Forms.Label();
             this.lstMsg = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -271,11 +272,22 @@
             this.lstMsg.Size = new System.Drawing.Size(398, 40);
             this.lstMsg.TabIndex = 104;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(239, 251);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 105;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 291);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lstMsg);
             this.Controls.Add(this.labNAME);
             this.Controls.Add(this.labTOKEN);
@@ -330,7 +342,7 @@
         private System.Windows.Forms.Label labNAME;
         private System.Windows.Forms.ListBox lstMsg;
         private System.Windows.Forms.CheckBox chkSHUTDOWN;
-
+        private System.Windows.Forms.Button button1;
     }
 }
 

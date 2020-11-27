@@ -13,6 +13,9 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Net;
+using Newtonsoft.Json;
+
+
 
 //using System.Data.SqlClient; // 改用MONGO
 //using System.Xml;
@@ -70,7 +73,7 @@ namespace AutoBrowser
 
                 System.Threading.Thread.Sleep(1500); //等待程式執行完成
 
-                //跑過ALERT --start--
+                //跑過ALERT--start-- (REF: https://blog.csdn.net/iteye_982/article/details/81574936)
                 AlertDialogHandler AlertDialog = new AlertDialogHandler();
                
                 //Code for checking if the case number is invalid and a dialog box appears.
@@ -355,7 +358,7 @@ namespace AutoBrowser
         {
             if (token != "")
             {
-                string result = null;
+                //string result = null;
 
                 try
                 {
@@ -364,23 +367,35 @@ namespace AutoBrowser
                     //result = ws.Send(token, msg);
 
                     //***web api***
-                    // 建立 webclient(GET)
+                    // POST
                     using (WebClient webClient = new WebClient())
                     {
-                        // 指定 WebClient 的編碼
+                        // 指定 WebClient 編碼
                         webClient.Encoding = Encoding.UTF8;
                         // 指定 WebClient 的 Content-Type header
                         webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                        // 網址
-                        string url = "http://localhost:61103/api/line/" + token + "/" + msg;
-                        // 從網路 url 上取得資料
-                        result = webClient.DownloadString(url);                    
+                        // 指定 WebClient 的 authorization header
+                        webClient.Headers.Add("authorization", "token {apitoken}");
+                        // 準備寫入的 data
+                        PostData postData = new PostData() { TOKEN = token, MSG = msg };
+                        // 將 data 轉為 json
+                        string json = JsonConvert.SerializeObject(postData);
+                        // REF: https://stackoverflow.com/a/39534068/288936
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls |SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                        // 執行 post 動作
+                        var result = webClient.UploadString("https://localhost:5001/api/values", json);
+
+                        //MessageBox.Show(result);
                     }
+
                 }
                 catch (Exception)
                 {
+                    //throw;
                     sendMail(txtMAIL.Text.ToString(),"LINE通知功能異常,改用EMAIL通知");                    
-                }                
+                }
+
+                   
             }
         }
 
@@ -745,6 +760,17 @@ namespace AutoBrowser
         //    }
         //}
         #endregion
-        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            sendLine("1111","OK");
+        }
     }
+
+    public class PostData
+    {
+        public string MSG { get; set; }
+        public string TOKEN { get; set; }
+    }
+      
 }
