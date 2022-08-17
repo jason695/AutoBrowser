@@ -52,7 +52,8 @@
             this.labTOKEN = new System.Windows.Forms.Label();
             this.labNAME = new System.Windows.Forms.Label();
             this.lstMsg = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLINE = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,7 +131,7 @@
             // 
             this.btnSHUTDOWN.BackColor = System.Drawing.Color.Red;
             this.btnSHUTDOWN.ForeColor = System.Drawing.Color.White;
-            this.btnSHUTDOWN.Location = new System.Drawing.Point(213, 193);
+            this.btnSHUTDOWN.Location = new System.Drawing.Point(213, 187);
             this.btnSHUTDOWN.Margin = new System.Windows.Forms.Padding(2);
             this.btnSHUTDOWN.Name = "btnSHUTDOWN";
             this.btnSHUTDOWN.Size = new System.Drawing.Size(161, 40);
@@ -141,7 +142,7 @@
             // 
             // btnForm2
             // 
-            this.btnForm2.Location = new System.Drawing.Point(20, 193);
+            this.btnForm2.Location = new System.Drawing.Point(20, 187);
             this.btnForm2.Margin = new System.Windows.Forms.Padding(2);
             this.btnForm2.Name = "btnForm2";
             this.btnForm2.Size = new System.Drawing.Size(77, 40);
@@ -227,7 +228,7 @@
             // 
             // btnSYNC
             // 
-            this.btnSYNC.Location = new System.Drawing.Point(106, 193);
+            this.btnSYNC.Location = new System.Drawing.Point(106, 187);
             this.btnSYNC.Name = "btnSYNC";
             this.btnSYNC.Size = new System.Drawing.Size(77, 40);
             this.btnSYNC.TabIndex = 100;
@@ -244,7 +245,7 @@
             // labTOKEN
             // 
             this.labTOKEN.AutoSize = true;
-            this.labTOKEN.Location = new System.Drawing.Point(18, 238);
+            this.labTOKEN.Location = new System.Drawing.Point(216, 239);
             this.labTOKEN.Name = "labTOKEN";
             this.labTOKEN.Size = new System.Drawing.Size(43, 12);
             this.labTOKEN.TabIndex = 101;
@@ -254,7 +255,7 @@
             // labNAME
             // 
             this.labNAME.AutoSize = true;
-            this.labNAME.Location = new System.Drawing.Point(67, 238);
+            this.labNAME.Location = new System.Drawing.Point(265, 239);
             this.labNAME.Name = "labNAME";
             this.labNAME.Size = new System.Drawing.Size(38, 12);
             this.labNAME.TabIndex = 103;
@@ -267,27 +268,40 @@
             this.lstMsg.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lstMsg.FormattingEnabled = true;
             this.lstMsg.ItemHeight = 12;
-            this.lstMsg.Location = new System.Drawing.Point(0, 251);
+            this.lstMsg.Location = new System.Drawing.Point(0, 285);
             this.lstMsg.Name = "lstMsg";
             this.lstMsg.Size = new System.Drawing.Size(398, 40);
             this.lstMsg.TabIndex = 104;
             // 
-            // button1
+            // btnLINE
             // 
-            this.button1.Location = new System.Drawing.Point(239, 251);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 105;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLINE.Location = new System.Drawing.Point(21, 237);
+            this.btnLINE.Name = "btnLINE";
+            this.btnLINE.Size = new System.Drawing.Size(161, 40);
+            this.btnLINE.TabIndex = 105;
+            this.btnLINE.Text = "line通知功能測試";
+            this.btnLINE.UseVisualStyleBackColor = true;
+            this.btnLINE.Click += new System.EventHandler(this.btnLINE_Click);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkVisited = true;
+            this.linkLabel1.Location = new System.Drawing.Point(216, 251);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel1.TabIndex = 106;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "版本說明";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 291);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(398, 325);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.btnLINE);
             this.Controls.Add(this.lstMsg);
             this.Controls.Add(this.labNAME);
             this.Controls.Add(this.labTOKEN);
@@ -342,7 +356,8 @@
         private System.Windows.Forms.Label labNAME;
         private System.Windows.Forms.ListBox lstMsg;
         private System.Windows.Forms.CheckBox chkSHUTDOWN;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLINE;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

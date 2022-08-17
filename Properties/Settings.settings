@@ -17,9 +17,6 @@
     <Setting Name="logDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:\AutoBrowser_log\</Value>
     </Setting>
-    <Setting Name="mongo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mongodb://10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017</Value>
-    </Setting>
     <Setting Name="TOKEN" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -28,6 +25,9 @@
     </Setting>
     <Setting Name="path_local" Type="System.String" Scope="Application">
       <Value Profile="(Default)">c:\AutoBrowser_log\list_p.txt</Value>
+    </Setting>
+    <Setting Name="mongo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mongodb://root:1qaz!QAZ@10.11.34.59:27017/?replicaSet=jasons</Value>
     </Setting>
   </Settings>
 </SettingsFile>

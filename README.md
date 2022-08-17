@@ -1,133 +1,136 @@
 Welcome to the AutoBrowser wiki!
-# æ‰“å¡è¨˜éŒ„:
-* 1.MAILé€šçŸ¥,å¯„ä»¶è€…ç‚ºSQLDB@sinopac.com,é€éŽ10.11.6.34çš„DBç™¼é€
-* 2.LOGç•™å­˜,è·¯å¾‘ç‚ºC:\AutoBrowser_log\AutoBrowser_log.txt
-* 3.ç•«é¢å‚™ä»½,è·¯å¾‘ç‚ºC:\AutoBrowser_log\screenYYYYMMDD.jpg
+# ¥´¥d°O¿ý:
+* 1.MAIL³qª¾,±H¥óªÌ¬°SQLDB@sinopac.com,³z¹L10.11.6.34ªºDBµo°e
+* 2.LOG¯d¦s,¸ô®|¬°C:\AutoBrowser_log\AutoBrowser_log.txt
+* 3.µe­±³Æ¥÷,¸ô®|¬°C:\AutoBrowser_log\screenYYYYMMDD.jpg
 
 ------------------------------
-# ä¿®æ”¹è¨˜éŒ„:
+# ­×§ï°O¿ý:
 ## @20170201 (V2.4.3)
-* 1.åœ¨å•Ÿå‹•æ™‚,å–å›žæª”æ¡ˆè‡³æœ¬æ©Ÿ(æ³¨æ„æ•ˆèƒ½å•é¡Œ)
-* 2.ä¸‹æ‹‰é¸å–®çš„è®€æª”é †åºç‚º: é ç«¯1 > é ç«¯2 > æœ¬æ©Ÿ
-  * é ç«¯1:\\10.11.22.51\d$\113720\list_p.txt --> path1
-  * é ç«¯2:\\10.11.34.172\c$\list_p.txt --> path2
-  * æœ¬æ©Ÿ:C:\\AutoBrowser_log\\list_p.txt --> path3
+* 1.¦b±Ò°Ê®É,¨ú¦^ÀÉ®×¦Ü¥»¾÷(ª`·N®Ä¯à°ÝÃD)
+* 2.¤U©Ô¿ï³æªºÅªÀÉ¶¶§Ç¬°: »·ºÝ1 > »·ºÝ2 > ¥»¾÷
+  * * »·ºÝ1:\\10.11.22.51\d$\113720\list_p.txt --> path1
+  * * »·ºÝ2:\\10.11.34.172\c$\list_p.txt --> path2
+  * * ¥»¾÷:C:\\AutoBrowser_log\\list_p.txt --> path3
 
 ## @20170201 (V2.4.4)
-* 1.åŠ å¿«é–‹å•Ÿé€Ÿåº¦,é€£ç·šç£ç¢Ÿæ”¹éžåŒæ­¥
-* 2.ä¸‹æ‹‰é¸å–®ä»¥æœ¬æ©Ÿæª”æ¡ˆç‚ºå…ˆ,å¾Œè®€é ç«¯
+* 1.¥[§Ö¶}±Ò³t«×,³s½uºÏºÐ§ï«D¦P¨B
+* 2.¤U©Ô¿ï³æ¥H¥»¾÷ÀÉ®×¬°¥ý,«áÅª»·ºÝ
 
 ## @20170223 (V2.4.4.1)
-* 1.å¯„ä¿¡æ”¹ç‚ºå‘¼å«æœ¬æ©ŸOUTLOOK
+* 1.±H«H§ï¬°©I¥s¥»¾÷OUTLOOK
 
 ## @20170426 (V2.4.4.2)
-* 1.åŠ å…¥github (https://github.com/jason695/AutoBrowser.git)
-* 2.åå–®æª”åŒæ­¥æ©Ÿåˆ¶.jpg
-å¸³å¯†æœƒå„²å­˜åœ°é»žã€å–ç”¨çš„å„ªå…ˆé †åºå¦‚ä¸‹
-	* 1.ä½¿ç”¨é ç«¯1é€£ç·š --> "10.11.34.172"
-	* 2.ä½¿ç”¨é ç«¯2é€£ç·š --> "10.11.22.51"
-	* 3.ä½¿ç”¨æœ¬æ©Ÿé€£ç·š
+* 1.¥[¤Jgithub (https://github.com/jason695/AutoBrowser.git)
+* 2.¦W³æÀÉ¦P¨B¾÷¨î.jpg
+±b±K·|Àx¦s¦aÂI¡B¨ú¥ÎªºÀu¥ý¶¶§Ç¦p¤U
+	* * 1.¨Ï¥Î»·ºÝ1³s½u --> "10.11.34.172"
+	* * 2.¨Ï¥Î»·ºÝ2³s½u --> "10.11.22.51"
+	* * 3.¨Ï¥Î¥»¾÷³s½u
 
-æŒ‡ä»¤ç‚º:
+«ü¥O¬°:
 net use \\@remoteHost @passWord /user:@userName
 
-** V2.4.4.1æœƒå› ç‚ºæœ‰å·²è¨­å®šé ç«¯ç£ç¢Ÿå·²è€Œç„¡æ³•ä½¿ç”¨
-** V2.4.4.2å·²è§£æ±ºæ­¤å•é¡Œ
+* * V2.4.4.1·|¦]¬°¦³¤w³]©w»·ºÝºÏºÐ¤w¦ÓµLªk¨Ï¥Î
+* * V2.4.4.2¤w¸Ñ¨M¦¹°ÝÃD
 
 ## @20170516 (V2.4.4.3)
-* 1.ç§»é™¤ä¸‹æ‹‰é¸å–®åŒæ­¥ FOR æ˜Šæ¾
+* 1.²¾°£¤U©Ô¿ï³æ¦P¨B FOR ©þæX
 
 ## @20170622 (V2.4.5.1)
-* 1.ä½¿ç”¨MONGODBåŒæ­¥,å®‰è£æ–¼
-	* 10.11.9.191 (win2008)
-	* 10.11.42.37 (win2008)
+* 1.¨Ï¥ÎMONGODB¦P¨B,¦w¸Ë©ó
+	* * 10.11.9.191 (win2008)
+	* * 10.11.42.37 (win2008)
 
-* 2.ç›¸é—œè¨­å®š
-	--ç’°å¢ƒè®Šæ•¸pathæ–°å¢ž
+* 2.¬ÛÃö³]©w
+	--Àô¹ÒÅÜ¼Æpath·s¼W
 	C:\Program Files\MongoDB\Server\3.4\bin
 
-	--å»ºç›®éŒ„
+	--«Ø¥Ø¿ý
 	C:\>mkdir mongodb\dbwt
 
-	--åœ¨Windowsä¸­ä»¥æœå‹™æ–¹å¼å•Ÿå‹•MongoDB
+	--¦bWindows¤¤¥HªA°È¤è¦¡±Ò°ÊMongoDB
 	C:\>mongod --port 27017 --dbpath c:\mongodb\dbwt --logpath c:\mongodb\dbwt\dbwt.log --install --serviceName "MongoDBdbwt" --replSet jasons
 	C:\>net start "MongoDBdbwt"
-	MongoDB æœå‹™æ­£åœ¨å•Ÿå‹• ..
-	MongoDB æœå‹™å·²ç¶“å•Ÿå‹•æˆåŠŸã€‚
+	MongoDB ªA°È¥¿¦b±Ò°Ê ..
+	MongoDB ªA°È¤w¸g±Ò°Ê¦¨¥\¡C
 
-	--é—œé–‰æœå‹™
+	--Ãö³¬ªA°È
 	C:\>net stop "MongoDBdbwt"
 
-	--ç§»é™¤æœå‹™
+	--²¾°£ªA°È
 	C:\>mongod --remove --serviceName "MongoDBdbwt"
 
-	--é€£ç·š
+	--³s½u
 	mongo --host 10.11.9.191
 
-	--è¨­å®šreplica set
+	--³]©wreplica set
 
 ## @20170712 (V2.4.5.2)
-* 1.åŠ å…¥MONGODBåå–®æ›´æ–°é€šçŸ¥
-	* mongo 10.11.9.191:27017
-	* mongo 10.11.42.37:27017
-	* mongo 10.11.34.59:27017
-	* Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017
-* 2.DBè³‡è¨Š
-	* db: AutoBrowser
-	* collection: Products
-	* column: txt,ip,dtime
-* 3.èªžæ³•
-	* mongo 10.11.9.191:27017
-	* use AutoBrowser
-	* db.Products.find();
-	* db.Products_LOG.find();
+* 1.¥[¤JMONGODB¦W³æ§ó·s³qª¾
+	* * mongo 10.11.9.191:27017
+	* * mongo 10.11.42.37:27017
+	* * mongo 10.11.34.59:27017
+	* * Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017
+* 2.DB¸ê°T
+	* * db: AutoBrowser
+	* * collection: Products
+	* * column: txt,ip,dtime
+* 3.»yªk
+	* * mongo 10.11.9.191:27017
+	* * use AutoBrowser
+	* * db.Products.find();
+	* * db.Products_LOG.find();
 
-* 4.åŒ¯å‡º
-	
+* 4.¶×¥X
+	mongoexport --host 10.11.34.59 -d AutoBrowser -c Products_LOG -o output.json
 
 ## @20170918 (V2.4.5.3)
-* 1.åŠ å…¥æ–°mongoä¸»æ©Ÿ
-* 2.æ–°å¢žTABLE:Products_log,æ–°å¢ž&ä¸åˆªé™¤
-* 3.ç¶­è­·åå–®å‰å…ˆåŒæ­¥DB
+* 1.¥[¤J·smongo¥D¾÷
+* 2.·s¼WTABLE:Products_log,·s¼W&¤£§R°£
+* 3.ºûÅ@¦W³æ«e¥ý¦P¨BDB
 
 ## @20171018 (V2.4.5.4)
-* 1.ç¶­è­·åå–®ä¿®æ”¹å¯†ç¢¼,è‹¥å’Œé è¨­IDç›¸åŒ,å‰‡åŒæ­¥æ›´æ–°LOCALé è¨­å¯†ç¢¼
+* 1.ºûÅ@¦W³æ­×§ï±K½X,­Y©M¹w³]ID¬Û¦P,«h¦P¨B§ó·sLOCAL¹w³]±K½X
 
 ## @20171115 (V2.4.5.5)
-* 1.æŽ’ç¨‹&é—œæ©Ÿæ‰“å¡åŠŸèƒ½,æš«åœOUTLOOKå¯„é€
+* 1.±Æµ{&Ãö¾÷¥´¥d¥\¯à,¼È°±OUTLOOK±H°e
 
 ## @20171124 (V2.4.5.6)
-* 1.æ”¹ç‚ºç™»å…¥æ°¸è±é›²æ‰“å¡
+* 1.§ï¬°µn¤J¥ÃÂ×¶³¥´¥d
 
 ## @20171128 (V2.4.5.7)
-* 1.æ–°å¢žLINE NOTIFYé€šçŸ¥åŠŸèƒ½,ç›¸é—œèªªæ˜Žè«‹åƒè€ƒ:æ”¯æ´LINEé€šçŸ¥.docx
+* 1.·s¼WLINE NOTIFY³qª¾¥\¯à,¬ÛÃö»¡©ú½Ð°Ñ¦Ò:¤ä´©LINE³qª¾.docx
 
 ## @20171206 (V2.4.5.8)
-* 1.æŽ’ç¨‹æ‰“å¡
-* 2.ç™»å…¥ç•°å¸¸/éŒ¯èª¤è™•ç†
-* 3.æ–°å¢žæŽ¨æ’­é€šçŸ¥
-* 4.æ›´æ–°WEB SERVICEç¶²å€(http://35.189.190.46/LINENOTIFY/WS.asmx)
-* 5.æ–°å¢žICON
+* 1.±Æµ{¥´¥d
+* 2.µn¤J²§±`/¿ù»~³B²z
+* 3.·s¼W±À¼½³qª¾
+* 4.§ó·sWEB SERVICEºô§}(http://35.189.190.46/LINENOTIFY/WS.asmx)
+* 5.·s¼WICON
 
 ## @20180525 (V2.4.5.9)
-* 1.å¼·åŒ–æ‰“å¡ç•°å¸¸è™•ç†
+* 1.±j¤Æ¥´¥d²§±`³B²z
 
 ## @20181213 (V2.4.6.0)
-* 1.åŽŸCALL WebServiceæ”¹ç‚ºWeb API
-* 2.URLé‚„æœªç¢ºå®š
+* 1.­ìCALL WebService§ï¬°Web API
+* 2.URLÁÙ¥¼½T©w
 
 ## @20191005 (V2.4.6.0)
-* 1.æ–°å¢ž10.11.34.172ï¼Œç§»é™¤10.11.42.37
-    * mongo 10.11.9.191:27017
-    * mongo 10.11.34.59:27017
-    * mongo 10.11.34.172:27017
+* 1.·s¼W10.11.34.172¡A²¾°£10.11.42.37
+    * * mongo 10.11.9.191:27017
+    * * mongo 10.11.34.59:27017
+    * * mongo 10.11.34.172:27017
 
 ## @20200724 (V2.4.6.0)
-* 1.ç™»å…¥å¾Œé‡åˆ°ALERTè¦–çª—,å¯ä»¥æŒ‰ç¢ºå®šè·³éŽ
+* 1.µn¤J«á¹J¨ìALERTµøµ¡,¥i¥H«ö½T©w¸õ¹L
 
 ## @20201112 (V2.4.6.0)
-* 1.æ–°å¢ž10.11.34.172ï¼Œç§»é™¤10.11.9.191
+* 1.·s¼W10.11.34.172¡A²¾°£10.11.9.191
     * mongo 10.11.34.59:27017
     * mongo 10.11.34.172:27017
     * mongo 10.11.36.192:27017
-    * é€£ç·šèªžæ³•: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
+    * ³s½u»yªk: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
+
+## @20220817 (V2.4.6.1)
+* 1.LINE¥\¯à¹J¨ìTLS 1.0°±¥Î,§ï¼gªk¬°TLS 1.2

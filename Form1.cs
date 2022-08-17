@@ -14,8 +14,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Net;
 using Newtonsoft.Json;
-
-
+using System.Collections.Specialized;
 
 //using System.Data.SqlClient; // 改用MONGO
 //using System.Xml;
@@ -46,6 +45,8 @@ namespace AutoBrowser
             load_ini();
             getData_ini();
             getTips();
+
+            
 
             backgroundWorker1.RunWorkerAsync(); 
         }
@@ -366,36 +367,23 @@ namespace AutoBrowser
                     //ServiceReference1.WSSoapClient ws = new ServiceReference1.WSSoapClient();
                     //result = ws.Send(token, msg);
 
-                    //***web api***
-                    // POST
-                    using (WebClient webClient = new WebClient())
-                    {
-                        // 指定 WebClient 編碼
-                        webClient.Encoding = Encoding.UTF8;
-                        // 指定 WebClient 的 Content-Type header
-                        webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                        // 指定 WebClient 的 authorization header
-                        webClient.Headers.Add("authorization", "token {apitoken}");
-                        // 準備寫入的 data
-                        PostData postData = new PostData() { TOKEN = token, MSG = msg };
-                        // 將 data 轉為 json
-                        string json = JsonConvert.SerializeObject(postData);
-                        // REF: https://stackoverflow.com/a/39534068/288936
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls |SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                        // 執行 post 動作
-                        var result = webClient.UploadString("https://localhost:5001/api/values", json);
-
-                        //MessageBox.Show(result);
-                    }
-
+                    //***script.google WebClient***
+                    var wb = new WebClient();
+                    ServicePointManager.SecurityProtocol =
+                        SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls |
+                        SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    
+                    var data = new NameValueCollection();
+                    string url = "https://script.google.com/macros/s/AKfycbzeXyf9uZiqqVVCeNny8q9sGdEbrBlJLHo_LWw_hu5MwyCQt-1ADM0KcNJyR32Lppk/exec";
+                    data["msg"] = msg;
+                    data["token"] = token;
+                    var response = wb.UploadValues(url, "POST", data);
                 }
-                catch (Exception)
+                catch (WebException ex)
                 {
                     //throw;
                     sendMail(txtMAIL.Text.ToString(),"LINE通知功能異常,改用EMAIL通知");                    
-                }
-
-                   
+                }                   
             }
         }
 
@@ -760,10 +748,15 @@ namespace AutoBrowser
         //    }
         //}
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
+                    
+        private void btnLINE_Click(object sender, EventArgs e)
         {
-            sendLine("1111","OK");
+            sendLine(labTOKEN.Text.ToString(), "TEST");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/jason695/AutoBrowser#readme");
         }
     }
 
