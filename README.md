@@ -133,4 +133,4 @@ net use \\@remoteHost @passWord /user:@userName
     * 連線語法: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
 
 ## @20220817 (V2.4.6.1)
-* 1.LINE功能遇到TLS 1.0停用,改寫法為TLS 1.2
+* 1.LINE遇到TLS1.0停用,改寫法為TLS 1.2
