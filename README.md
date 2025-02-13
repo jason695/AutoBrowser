@@ -134,3 +134,6 @@ net use \\@remoteHost @passWord /user:@userName
 
 ## @20220817 (V2.4.6.1)
 * 1.LINE遇到TLS1.0停用,改寫法為TLS 1.2
+
+## @20250213 (V2.4.6.2)
+* 1.將LINE NOTIFY改寫為LINE API

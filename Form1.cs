@@ -372,12 +372,17 @@ namespace AutoBrowser
                     ServicePointManager.SecurityProtocol =
                         SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls |
                         SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                    
-                    var data = new NameValueCollection();
-                    string url = "https://script.google.com/macros/s/AKfycbzeXyf9uZiqqVVCeNny8q9sGdEbrBlJLHo_LWw_hu5MwyCQt-1ADM0KcNJyR32Lppk/exec";
-                    data["msg"] = msg;
-                    data["token"] = token;
-                    var response = wb.UploadValues(url, "POST", data);
+
+                    //***line notify***
+                    //var data = new NameValueCollection();
+                    //string url = "https://script.google.com/macros/s/AKfycbzeXyf9uZiqqVVCeNny8q9sGdEbrBlJLHo_LWw_hu5MwyCQt-1ADM0KcNJyR32Lppk/exec";
+                    //data["msg"] = msg;
+                    //data["token"] = token;
+                    //var response = wb.UploadValues(url, "POST", data);
+
+                    //***line api***
+                    string url = "https://script.google.com/macros/s/AKfycbxJK7qkdelZOELpx9iGHpvOqMKoUyCWSg-HNx6vAk9J2BRAQb5Z394_MOLpXSRhMPRJ/exec?to="+token+"&t="+@msg;
+                    var response = wb.DownloadString(url); //GET
                 }
                 catch (WebException ex)
                 {
