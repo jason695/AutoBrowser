@@ -1,139 +1,140 @@
 Welcome to the AutoBrowser wiki!
-# ���d�O��:
-* 1.MAIL�q��,�H��̬�SQLDB@sinopac.com,�z�L10.11.6.34��DB�o�e
-* 2.LOG�d�s,���|��C:\AutoBrowser_log\AutoBrowser_log.txt
-* 3.�e���ƥ�,���|��C:\AutoBrowser_log\screenYYYYMMDD.jpg
+# 打卡記錄:
+* 1.MAIL通知,寄件者為SQLDB@sinopac.com,透過10.11.6.34的DB發送
+* 2.LOG留存,路徑為C:\AutoBrowser_log\AutoBrowser_log.txt
+* 3.畫面備份,路徑為C:\AutoBrowser_log\screenYYYYMMDD.jpg
 
 ------------------------------
-# �ק�O��:
+# 修改記錄:
 ## @20170201 (V2.4.3)
-* 1.�b�Ұʮ�,���^�ɮצܥ���(�`�N�į���D)
-* 2.�U�Կ�檺Ū�ɶ��Ǭ�: ����1 > ����2 > ����
-  * * ����1:\\10.11.22.51\d$\113720\list_p.txt --> path1
-  * * ����2:\\10.11.34.172\c$\list_p.txt --> path2
-  * * ����:C:\\AutoBrowser_log\\list_p.txt --> path3
+* 1.在啟動時,取回檔案至本機(注意效能問題)
+* 2.下拉選單的讀檔順序為: 遠端1 > 遠端2 > 本機
+  * * 遠端1:\\10.11.22.51\d$\113720\list_p.txt --> path1
+  * * 遠端2:\\10.11.34.172\c$\list_p.txt --> path2
+  * * 本機:C:\\AutoBrowser_log\\list_p.txt --> path3
 
 ## @20170201 (V2.4.4)
-* 1.�[�ֶ}�ҳt��,�s�u�ϺЧ�D�P�B
-* 2.�U�Կ��H�����ɮ׬���,��Ū����
+* 1.加快開啟速度,連線磁碟改非同步
+* 2.下拉選單以本機檔案為先,後讀遠端
 
 ## @20170223 (V2.4.4.1)
-* 1.�H�H�אּ�I�s����OUTLOOK
+* 1.寄信改為呼叫本機OUTLOOK
 
 ## @20170426 (V2.4.4.2)
-* 1.�[�Jgithub (https://github.com/jason695/AutoBrowser.git)
-* 2.�W���ɦP�B����.jpg
-�b�K�|�x�s�a�I�B���Ϊ��u�����Ǧp�U
-	* * 1.�ϥλ���1�s�u --> "10.11.34.172"
-	* * 2.�ϥλ���2�s�u --> "10.11.22.51"
-	* * 3.�ϥΥ����s�u
+* 1.加入github (https://github.com/jason695/AutoBrowser.git)
+* 2.名單檔同步機制.jpg
+帳密會儲存地點、取用的優先順序如下
+	* * 1.使用遠端1連線 --> "10.11.34.172"
+	* * 2.使用遠端2連線 --> "10.11.22.51"
+	* * 3.使用本機連線
 
-���O��:
+指令為:
 net use \\@remoteHost @passWord /user:@userName
 
-* * V2.4.4.1�|�]�����w�]�w���ݺϺФw�ӵL�k�ϥ�
-* * V2.4.4.2�w�ѨM�����D
+* * V2.4.4.1會因為有已設定遠端磁碟已而無法使用
+* * V2.4.4.2已解決此問題
 
 ## @20170516 (V2.4.4.3)
-* 1.�����U�Կ��P�B FOR ���X
+* 1.移除下拉選單同步 FOR 昊澐
 
 ## @20170622 (V2.4.5.1)
-* 1.�ϥ�MONGODB�P�B,�w�˩�
+* 1.使用MONGODB同步,安裝於
 	* * 10.11.9.191 (win2008)
 	* * 10.11.42.37 (win2008)
 
-* 2.�����]�w
-	--�����ܼ�path�s�W
+* 2.相關設定
+	--環境變數path新增
 	C:\Program Files\MongoDB\Server\3.4\bin
 
-	--�إؿ�
+	--建目錄
 	C:\>mkdir mongodb\dbwt
 
-	--�bWindows���H�A�Ȥ覡�Ұ�MongoDB
+	--在Windows中以服務方式啟動MongoDB
 	C:\>mongod --port 27017 --dbpath c:\mongodb\dbwt --logpath c:\mongodb\dbwt\dbwt.log --install --serviceName "MongoDBdbwt" --replSet jasons
 	C:\>net start "MongoDBdbwt"
-	MongoDB �A�ȥ��b�Ұ� ..
-	MongoDB �A�Ȥw�g�Ұʦ��\�C
+	MongoDB 服務正在啟動 ..
+	MongoDB 服務已經啟動成功。
 
-	--�����A��
+	--關閉服務
 	C:\>net stop "MongoDBdbwt"
 
-	--�����A��
+	--移除服務
 	C:\>mongod --remove --serviceName "MongoDBdbwt"
 
-	--�s�u
+	--連線
 	mongo --host 10.11.9.191
 
-	--�]�wreplica set
+	--設定replica set
 
 ## @20170712 (V2.4.5.2)
-* 1.�[�JMONGODB�W���s�q��
+* 1.加入MONGODB名單更新通知
 	* * mongo 10.11.9.191:27017
 	* * mongo 10.11.42.37:27017
 	* * mongo 10.11.34.59:27017
 	* * Server=jasons/10.11.9.191:27017,10.11.42.37:27017,10.11.34.59:27017
-* 2.DB��T
+* 2.DB資訊
 	* * db: AutoBrowser
 	* * collection: Products
 	* * column: txt,ip,dtime
-* 3.�y�k
+* 3.語法
 	* * mongo 10.11.9.191:27017
 	* * use AutoBrowser
 	* * db.Products.find();
 	* * db.Products_LOG.find();
 
-* 4.�ץX
+* 4.匯出
 	mongoexport --host 10.11.34.59 -d AutoBrowser -c Products_LOG -o output.json
 
 ## @20170918 (V2.4.5.3)
-* 1.�[�J�smongo�D��
-* 2.�s�WTABLE:Products_log,�s�W&���R��
-* 3.���@�W��e���P�BDB
+* 1.加入新mongo主機
+* 2.新增TABLE:Products_log,新增&不刪除
+* 3.維護名單前先同步DB
 
 ## @20171018 (V2.4.5.4)
-* 1.���@�W��ק�K�X,�Y�M�w�]ID�ۦP,�h�P�B��sLOCAL�w�]�K�X
+* 1.維護名單修改密碼,若和預設ID相同,則同步更新LOCAL預設密碼
 
 ## @20171115 (V2.4.5.5)
-* 1.�Ƶ{&�������d�\��,�Ȱ�OUTLOOK�H�e
+* 1.排程&關機打卡功能,暫停OUTLOOK寄送
 
 ## @20171124 (V2.4.5.6)
-* 1.�אּ�n�J���׶����d
+* 1.改為登入永豐雲打卡
 
 ## @20171128 (V2.4.5.7)
-* 1.�s�WLINE NOTIFY�q���\��,���������аѦ�:�䴩LINE�q��.docx
+* 1.新增LINE NOTIFY通知功能,相關說明請參考:支援LINE通知.docx
 
 ## @20171206 (V2.4.5.8)
-* 1.�Ƶ{���d
-* 2.�n�J���`/���~�B�z
-* 3.�s�W�����q��
-* 4.��sWEB SERVICE���}(http://35.189.190.46/LINENOTIFY/WS.asmx)
-* 5.�s�WICON
+* 1.排程打卡
+* 2.登入異常/錯誤處理
+* 3.新增推播通知
+* 4.更新WEB SERVICE網址(http://35.189.190.46/LINENOTIFY/WS.asmx)
+* 5.新增ICON
 
 ## @20180525 (V2.4.5.9)
-* 1.�j�ƥ��d���`�B�z
+* 1.強化打卡異常處理
 
 ## @20181213 (V2.4.6.0)
-* 1.��CALL WebService�אּWeb API
-* 2.URL�٥��T�w
+* 1.原CALL WebService改為Web API
+* 2.URL還未確定
 
 ## @20191005 (V2.4.6.0)
-* 1.�s�W10.11.34.172�A����10.11.42.37
+* 1.新增10.11.34.172，移除10.11.42.37
     * * mongo 10.11.9.191:27017
     * * mongo 10.11.34.59:27017
     * * mongo 10.11.34.172:27017
 
 ## @20200724 (V2.4.6.0)
-* 1.�n�J��J��ALERT����,�i�H���T�w���L
+* 1.登入後遇到ALERT視窗,可以按確定跳過
 
 ## @20201112 (V2.4.6.0)
-* 1.�s�W10.11.34.172�A����10.11.9.191
+* 1.新增10.11.34.172，移除10.11.9.191
     * mongo 10.11.34.59:27017
     * mongo 10.11.34.172:27017
     * mongo 10.11.36.192:27017
-    * �s�u�y�k: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
+    * 連線語法: mongo --host jasons/10.11.34.59:27017,10.11.34.172:27017,10.11.36.192:27017
 
 ## @20220817 (V2.4.6.1)
-* 1.LINE�J��TLS1.0����,��g�k��TLS 1.2
+* 1.LINE遇到TLS1.0停用,改寫法為TLS 1.2
 
 ## @20250213 (V2.4.6.2)
-* 1.�NLINE NOTIFY��g��LINE API
+* 1.將LINE NOTIFY改寫為LINE API
+* 2.更新弱點元件
